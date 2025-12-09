@@ -79,10 +79,6 @@
     </script>
 
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
         @property --_gradient-angle {
             syntax: '<angle>';
             inherits: false;
@@ -8979,6 +8975,17 @@ a,
             if (aboutSection) observer.observe(aboutSection);
             if (coursesSection) observer.observe(coursesSection);
         });
+    </script>
+    <script src="js/lenis.min.js"></script>
+    <script>
+        const lenis = new Lenis();
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
     </script>
 </body>
 
