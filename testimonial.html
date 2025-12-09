@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials - The Love from our Students</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['serif'],
+                    },
+                    colors: {
+                        'primary-purple': '#8B1df5',
+                        'text-dark': '#1a1a1a',
+                        'text-gray': '#666',
+                        'bg-light': '#f9f9f9',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for Swiper pagination that are hard to do with utility classes only */
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            opacity: 1;
+            transition: all 0.3s;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #333;
+            width: 30px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-text-dark m-0 p-0 font-sans">
+
+    <section class="py-20 px-5 overflow-hidden">
+        <div class="max-w-[1600px] mx-auto text-center relative">
+
+            <div
+                class="swiper-button-prev-custom absolute top-[55%] -translate-y-1/2 w-10 h-10 bg-[#333] rounded-full text-white flex items-center justify-center cursor-pointer z-10 transition-colors hover:bg-black left-[32%] max-lg:hidden">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </div>
+            <div
+                class="swiper-button-next-custom absolute top-[55%] -translate-y-1/2 w-10 h-10 bg-[#333] rounded-full text-white flex items-center justify-center cursor-pointer z-10 transition-colors hover:bg-black right-[32%] max-lg:hidden">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </div>
+
+            <div class="swiper testimonialSwiper w-full pt-[60px] pb-[60px] px-5 md:px-[50px]">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1: Khushi Hulmani -->
+                    <div
+                        class="swiper-slide bg-white rounded-[20px] w-[85%] sm:w-[400px] md:w-[550px] px-6 py-8 md:pt-[50px] md:pb-[40px] md:px-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 relative flex flex-col items-center text-center opacity-100 h-auto mt-5 [&.swiper-slide-active]:bg-[#9333ea] [&.swiper-slide-active]:bg-gradient-to-br [&.swiper-slide-active]:from-[#a855f7] [&.swiper-slide-active]:to-[#9333ea] [&.swiper-slide-active]:text-white [&.swiper-slide-active]:z-[2] [&.swiper-slide-active]:shadow-[0_20px_50px_rgba(147,51,234,0.3)] [&.swiper-slide-active]:scale-105 [&.swiper-slide-active]:mt-0">
+                        <div
+                            class="profile-wrapper absolute -top-[50px] left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] [&.swiper-slide-active_&]:w-[100px] [&.swiper-slide-active_&]:h-[100px] [&.swiper-slide-active_&]:-top-[60px] [&.swiper-slide-active_&]:border-[5px] [&.swiper-slide-active_&]:border-white">
+                            <img src="images/testimonials/photo1.jpg" alt="Khushi Hulmani"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="quote-icon-top absolute top-[100px] left-5 text-[4rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                        <h3
+                            class="user-name text-[1.1rem] font-semibold mt-10 mb-[5px] [&.swiper-slide-active_&]:mt-[50px] [&.swiper-slide-active_&]:text-[1.2rem]">
+                            Khushi Hulmani</h3>
+                        <p
+                            class="user-role text-[0.85rem] text-[#777] mb-5 [&.swiper-slide-active_&]:text-white/90 [&.swiper-slide-active_&]:text-[0.9rem]">
+                            MBBS</p>
+                        <div class="testimonial-title text-[1.1rem] font-bold mb-[15px] leading-snug">Unforgettable learning experience</div>
+                        <p
+                            class="testimonial-text text-[0.9rem] leading-relaxed text-[#555] font-normal [&.swiper-slide-active_&]:text-white/95">
+                            "Those were truly unforgettable days. I thoroughly enjoyed every class, learning concepts that have stayed with me ever since. Even now, I vividly recall the techniques you taught in organic chemistry. I am proud to say that I am now studying at a government medical college, and without a doubt, your teaching played a crucial role in helping me achieve this milestone."
+                        </p>
+                        <div
+                            class="quote-icon-bottom absolute bottom-5 right-5 text-[5rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                    </div>
+
+                    <!-- Slide 2: Dimple Shree -->
+                    <div
+                        class="swiper-slide bg-white rounded-[20px] w-[85%] sm:w-[400px] md:w-[550px] px-6 py-8 md:pt-[50px] md:pb-[40px] md:px-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 relative flex flex-col items-center text-center opacity-100 h-auto mt-5 [&.swiper-slide-active]:bg-[#9333ea] [&.swiper-slide-active]:bg-gradient-to-br [&.swiper-slide-active]:from-[#a855f7] [&.swiper-slide-active]:to-[#9333ea] [&.swiper-slide-active]:text-white [&.swiper-slide-active]:z-[2] [&.swiper-slide-active]:shadow-[0_20px_50px_rgba(147,51,234,0.3)] [&.swiper-slide-active]:scale-105 [&.swiper-slide-active]:mt-0">
+                        <div
+                            class="profile-wrapper absolute -top-[50px] left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] [&.swiper-slide-active_&]:w-[100px] [&.swiper-slide-active_&]:h-[100px] [&.swiper-slide-active_&]:-top-[60px] [&.swiper-slide-active_&]:border-[5px] [&.swiper-slide-active_&]:border-white">
+                            <img src="images/testimonials/photo2.jpg" alt="Dimple Shree"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="quote-icon-top absolute top-[100px] left-5 text-[4rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                        <h3
+                            class="user-name text-[1.1rem] font-semibold mt-10 mb-[5px] [&.swiper-slide-active_&]:mt-[50px] [&.swiper-slide-active_&]:text-[1.2rem]">
+                            Dimple Shree</h3>
+                        <p
+                            class="user-role text-[0.85rem] text-[#777] mb-5 [&.swiper-slide-active_&]:text-white/90 [&.swiper-slide-active_&]:text-[0.9rem]">
+                            MBBS</p>
+                        <div class="testimonial-title text-[1.1rem] font-bold mb-[15px] leading-snug">Engaging and interactive sessions</div>
+                        <p
+                            class="testimonial-text text-[0.9rem] leading-relaxed text-[#555] font-normal [&.swiper-slide-active_&]:text-white/95">
+                            "Sir's sessions were highly engaging and interactive, making the learning experience both enjoyable and enriching."
+                        </p>
+                        <div
+                            class="quote-icon-bottom absolute bottom-5 right-5 text-[5rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                    </div>
+
+                    <!-- Slide 3: Shreyes Ram V -->
+                    <div
+                        class="swiper-slide bg-white rounded-[20px] w-[85%] sm:w-[400px] md:w-[550px] px-6 py-8 md:pt-[50px] md:pb-[40px] md:px-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 relative flex flex-col items-center text-center opacity-100 h-auto mt-5 [&.swiper-slide-active]:bg-[#9333ea] [&.swiper-slide-active]:bg-gradient-to-br [&.swiper-slide-active]:from-[#a855f7] [&.swiper-slide-active]:to-[#9333ea] [&.swiper-slide-active]:text-white [&.swiper-slide-active]:z-[2] [&.swiper-slide-active]:shadow-[0_20px_50px_rgba(147,51,234,0.3)] [&.swiper-slide-active]:scale-105 [&.swiper-slide-active]:mt-0">
+                        <div
+                            class="profile-wrapper absolute -top-[50px] left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] [&.swiper-slide-active_&]:w-[100px] [&.swiper-slide-active_&]:h-[100px] [&.swiper-slide-active_&]:-top-[60px] [&.swiper-slide-active_&]:border-[5px] [&.swiper-slide-active_&]:border-white">
+                            <img src="images/testimonials/photo3.jpg" alt="Shreyes Ram V"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="quote-icon-top absolute top-[100px] left-5 text-[4rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                        <h3
+                            class="user-name text-[1.1rem] font-semibold mt-10 mb-[5px] [&.swiper-slide-active_&]:mt-[50px] [&.swiper-slide-active_&]:text-[1.2rem]">
+                            Shreyes Ram V</h3>
+                        <p
+                            class="user-role text-[0.85rem] text-[#777] mb-5 [&.swiper-slide-active_&]:text-white/90 [&.swiper-slide-active_&]:text-[0.9rem]">
+                            Engineering</p>
+                        <div class="testimonial-title text-[1.1rem] font-bold mb-[15px] leading-snug">A new dimension to learning</div>
+                        <p
+                            class="testimonial-text text-[0.9rem] leading-relaxed text-[#555] font-normal [&.swiper-slide-active_&]:text-white/95">
+                            "PTS introduced a whole new dimension to learning, especially in the application of chemistry. It made understanding complex concepts effortless, removing the need to memorize catalysts by encouraging logical thinking instead. The clarity and depth of these lessons ensure the concepts stay with you for a lifetime."
+                        </p>
+                        <div
+                            class="quote-icon-bottom absolute bottom-5 right-5 text-[5rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                    </div>
+
+                    <!-- Slide 4: Chinmayi Angadi -->
+                    <div
+                        class="swiper-slide bg-white rounded-[20px] w-[85%] sm:w-[400px] md:w-[550px] px-6 py-8 md:pt-[50px] md:pb-[40px] md:px-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 relative flex flex-col items-center text-center opacity-100 h-auto mt-5 [&.swiper-slide-active]:bg-[#9333ea] [&.swiper-slide-active]:bg-gradient-to-br [&.swiper-slide-active]:from-[#a855f7] [&.swiper-slide-active]:to-[#9333ea] [&.swiper-slide-active]:text-white [&.swiper-slide-active]:z-[2] [&.swiper-slide-active]:shadow-[0_20px_50px_rgba(147,51,234,0.3)] [&.swiper-slide-active]:scale-105 [&.swiper-slide-active]:mt-0">
+                        <div
+                            class="profile-wrapper absolute -top-[50px] left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] [&.swiper-slide-active_&]:w-[100px] [&.swiper-slide-active_&]:h-[100px] [&.swiper-slide-active_&]:-top-[60px] [&.swiper-slide-active_&]:border-[5px] [&.swiper-slide-active_&]:border-white">
+                            <img src="images/testimonials/photo4.jpg" alt="Chinmayi Angadi"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="quote-icon-top absolute top-[100px] left-5 text-[4rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                        <h3
+                            class="user-name text-[1.1rem] font-semibold mt-10 mb-[5px] [&.swiper-slide-active_&]:mt-[50px] [&.swiper-slide-active_&]:text-[1.2rem]">
+                            Chinmayi Angadi</h3>
+                        <p
+                            class="user-role text-[0.85rem] text-[#777] mb-5 [&.swiper-slide-active_&]:text-white/90 [&.swiper-slide-active_&]:text-[0.9rem]">
+                            12th pass</p>
+                        <div class="testimonial-title text-[1.1rem] font-bold mb-[15px] leading-snug">Exceptional teacher and perfect mentor</div>
+                        <p
+                            class="testimonial-text text-[0.9rem] leading-relaxed text-[#555] font-normal [&.swiper-slide-active_&]:text-white/95">
+                            "It was an incredible experience. I still vividly remember the lessons he taught me in 11th grade. He was not only an exceptional teacher but also the perfect mentor."
+                        </p>
+                        <div
+                            class="quote-icon-bottom absolute bottom-5 right-5 text-[5rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                    </div>
+
+                    <!-- Slide 5: Thrisha T -->
+                    <div
+                        class="swiper-slide bg-white rounded-[20px] w-[85%] sm:w-[400px] md:w-[550px] px-6 py-8 md:pt-[50px] md:pb-[40px] md:px-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 relative flex flex-col items-center text-center opacity-100 h-auto mt-5 [&.swiper-slide-active]:bg-[#9333ea] [&.swiper-slide-active]:bg-gradient-to-br [&.swiper-slide-active]:from-[#a855f7] [&.swiper-slide-active]:to-[#9333ea] [&.swiper-slide-active]:text-white [&.swiper-slide-active]:z-[2] [&.swiper-slide-active]:shadow-[0_20px_50px_rgba(147,51,234,0.3)] [&.swiper-slide-active]:scale-105 [&.swiper-slide-active]:mt-0">
+                        <div
+                            class="profile-wrapper absolute -top-[50px] left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] [&.swiper-slide-active_&]:w-[100px] [&.swiper-slide-active_&]:h-[100px] [&.swiper-slide-active_&]:-top-[60px] [&.swiper-slide-active_&]:border-[5px] [&.swiper-slide-active_&]:border-white">
+                            <img src="images/testimonials/photo5.jpg" alt="Thrisha T"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="quote-icon-top absolute top-[100px] left-5 text-[4rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                        <h3
+                            class="user-name text-[1.1rem] font-semibold mt-10 mb-[5px] [&.swiper-slide-active_&]:mt-[50px] [&.swiper-slide-active_&]:text-[1.2rem]">
+                            Thrisha T</h3>
+                        <p
+                            class="user-role text-[0.85rem] text-[#777] mb-5 [&.swiper-slide-active_&]:text-white/90 [&.swiper-slide-active_&]:text-[0.9rem]">
+                            MBBS</p>
+                        <div class="testimonial-title text-[1.1rem] font-bold mb-[15px] leading-snug">Outstanding teaching with open environment</div>
+                        <p
+                            class="testimonial-text text-[0.9rem] leading-relaxed text-[#555] font-normal [&.swiper-slide-active_&]:text-white/95">
+                            "PTS is an outstanding teacher who created an open and supportive environment where we could ask questions and discuss challenges without hesitation. His remarkable ability to simplify complex topics made learning much easier and more enjoyable. His clear explanations had a profound impact on my understanding, and his constant encouragement helped me build confidence in my abilities."
+                        </p>
+                        <div
+                            class="quote-icon-bottom absolute bottom-5 right-5 text-[5rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                    </div>
+
+                    <!-- Slide 6: Sneha Basavaraj Bomble -->
+                    <div
+                        class="swiper-slide bg-white rounded-[20px] w-[85%] sm:w-[400px] md:w-[550px] px-6 py-8 md:pt-[50px] md:pb-[40px] md:px-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 relative flex flex-col items-center text-center opacity-100 h-auto mt-5 [&.swiper-slide-active]:bg-[#9333ea] [&.swiper-slide-active]:bg-gradient-to-br [&.swiper-slide-active]:from-[#a855f7] [&.swiper-slide-active]:to-[#9333ea] [&.swiper-slide-active]:text-white [&.swiper-slide-active]:z-[2] [&.swiper-slide-active]:shadow-[0_20px_50px_rgba(147,51,234,0.3)] [&.swiper-slide-active]:scale-105 [&.swiper-slide-active]:mt-0">
+                        <div
+                            class="profile-wrapper absolute -top-[50px] left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] [&.swiper-slide-active_&]:w-[100px] [&.swiper-slide-active_&]:h-[100px] [&.swiper-slide-active_&]:-top-[60px] [&.swiper-slide-active_&]:border-[5px] [&.swiper-slide-active_&]:border-white">
+                            <img src="images/testimonials/photo6.jpg" alt="Sneha Basavaraj Bomble"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="quote-icon-top absolute top-[100px] left-5 text-[4rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                        <h3
+                            class="user-name text-[1.1rem] font-semibold mt-10 mb-[5px] [&.swiper-slide-active_&]:mt-[50px] [&.swiper-slide-active_&]:text-[1.2rem]">
+                            Sneha Basavaraj Bomble</h3>
+                        <p
+                            class="user-role text-[0.85rem] text-[#777] mb-5 [&.swiper-slide-active_&]:text-white/90 [&.swiper-slide-active_&]:text-[0.9rem]">
+                            MBBS</p>
+                        <div class="testimonial-title text-[1.1rem] font-bold mb-[15px] leading-snug">Truly unique teaching style</div>
+                        <p
+                            class="testimonial-text text-[0.9rem] leading-relaxed text-[#555] font-normal [&.swiper-slide-active_&]:text-white/95">
+                            "PTS Sir's teaching style was truly unique, unlike any other class. He shared invaluable tricks to help us remember concepts effortlessly, and even to this day, they remain etched in my memory—like the unforgettable 'Sc Ti Va Cr Mn Fe Co Ni Cu' trick. His approach made complex concepts easy to grasp in a short amount of time. We still fondly remember and miss your teaching, Sir. The strategies you taught proved incredibly useful, especially during the NEET exam, where I scored 146 marks in chemistry in 2024. Thank you for your impactful guidance and support!"
+                        </p>
+                        <div
+                            class="quote-icon-bottom absolute bottom-5 right-5 text-[5rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                    </div>
+
+                    <!-- Slide 7: Balaji A -->
+                    <div
+                        class="swiper-slide bg-white rounded-[20px] w-[85%] sm:w-[400px] md:w-[550px] px-6 py-8 md:pt-[50px] md:pb-[40px] md:px-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 relative flex flex-col items-center text-center opacity-100 h-auto mt-5 [&.swiper-slide-active]:bg-[#9333ea] [&.swiper-slide-active]:bg-gradient-to-br [&.swiper-slide-active]:from-[#a855f7] [&.swiper-slide-active]:to-[#9333ea] [&.swiper-slide-active]:text-white [&.swiper-slide-active]:z-[2] [&.swiper-slide-active]:shadow-[0_20px_50px_rgba(147,51,234,0.3)] [&.swiper-slide-active]:scale-105 [&.swiper-slide-active]:mt-0">
+                        <div
+                            class="profile-wrapper absolute -top-[50px] left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] [&.swiper-slide-active_&]:w-[100px] [&.swiper-slide-active_&]:h-[100px] [&.swiper-slide-active_&]:-top-[60px] [&.swiper-slide-active_&]:border-[5px] [&.swiper-slide-active_&]:border-white">
+                            <img src="images/testimonials/photo7.jpg" alt="Balaji A"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="quote-icon-top absolute top-[100px] left-5 text-[4rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                        <h3
+                            class="user-name text-[1.1rem] font-semibold mt-10 mb-[5px] [&.swiper-slide-active_&]:mt-[50px] [&.swiper-slide-active_&]:text-[1.2rem]">
+                            Balaji A</h3>
+                        <p
+                            class="user-role text-[0.85rem] text-[#777] mb-5 [&.swiper-slide-active_&]:text-white/90 [&.swiper-slide-active_&]:text-[0.9rem]">
+                            B.Tech Computer Science and Business System</p>
+                        <div class="testimonial-title text-[1.1rem] font-bold mb-[15px] leading-snug">Teaching is an art</div>
+                        <p
+                            class="testimonial-text text-[0.9rem] leading-relaxed text-[#555] font-normal [&.swiper-slide-active_&]:text-white/95">
+                            "PTS teaching style was a constant source of inspiration for us. I had the privilege of learning from Paritosh Sir. His teaching style was captivating and filled with enthusiasm, making every chemistry class unmissable. He taught more like a friend, using practical, real-world examples to explain concepts—especially in organic chemistry—which made learning both engaging and relatable. For the past three years, I've been teaching chemistry to my juniors, and it's all thanks to Paritosh Sir. His influence shaped my passion for teaching. He always emphasized one thing: 'Teaching is an art.' His words and wisdom continue to inspire me deeply."
+                        </p>
+                        <div
+                            class="quote-icon-bottom absolute bottom-5 right-5 text-[5rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                    </div>
+
+                    <!-- Slide 8: Poornima Bhaskar -->
+                    <div
+                        class="swiper-slide bg-white rounded-[20px] w-[85%] sm:w-[400px] md:w-[550px] px-6 py-8 md:pt-[50px] md:pb-[40px] md:px-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 relative flex flex-col items-center text-center opacity-100 h-auto mt-5 [&.swiper-slide-active]:bg-[#9333ea] [&.swiper-slide-active]:bg-gradient-to-br [&.swiper-slide-active]:from-[#a855f7] [&.swiper-slide-active]:to-[#9333ea] [&.swiper-slide-active]:text-white [&.swiper-slide-active]:z-[2] [&.swiper-slide-active]:shadow-[0_20px_50px_rgba(147,51,234,0.3)] [&.swiper-slide-active]:scale-105 [&.swiper-slide-active]:mt-0">
+                        <div
+                            class="profile-wrapper absolute -top-[50px] left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] [&.swiper-slide-active_&]:w-[100px] [&.swiper-slide-active_&]:h-[100px] [&.swiper-slide-active_&]:-top-[60px] [&.swiper-slide-active_&]:border-[5px] [&.swiper-slide-active_&]:border-white">
+                            <img src="images/testimonials/photo8.jpg" alt="Poornima Bhaskar"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="quote-icon-top absolute top-[100px] left-5 text-[4rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                        <h3
+                            class="user-name text-[1.1rem] font-semibold mt-10 mb-[5px] [&.swiper-slide-active_&]:mt-[50px] [&.swiper-slide-active_&]:text-[1.2rem]">
+                            Poornima Bhaskar</h3>
+                        <p
+                            class="user-role text-[0.85rem] text-[#777] mb-5 [&.swiper-slide-active_&]:text-white/90 [&.swiper-slide-active_&]:text-[0.9rem]">
+                            MBBS</p>
+                        <div class="testimonial-title text-[1.1rem] font-bold mb-[15px] leading-snug">Exceptional clarity and life lessons</div>
+                        <p
+                            class="testimonial-text text-[0.9rem] leading-relaxed text-[#555] font-normal [&.swiper-slide-active_&]:text-white/95">
+                            "PTS delivers concepts with exceptional clarity, ensuring students fully grasp the intricacy of topics. Beyond academics, he imparts valuable life lessons and fosters determination. I've learned so much from him, both in studies and personal growth."
+                        </p>
+                        <div
+                            class="quote-icon-bottom absolute bottom-5 right-5 text-[5rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                    </div>
+
+                    <!-- Slide 9: Pallavi Krishna -->
+                    <div
+                        class="swiper-slide bg-white rounded-[20px] w-[85%] sm:w-[400px] md:w-[550px] px-6 py-8 md:pt-[50px] md:pb-[40px] md:px-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 relative flex flex-col items-center text-center opacity-100 h-auto mt-5 [&.swiper-slide-active]:bg-[#9333ea] [&.swiper-slide-active]:bg-gradient-to-br [&.swiper-slide-active]:from-[#a855f7] [&.swiper-slide-active]:to-[#9333ea] [&.swiper-slide-active]:text-white [&.swiper-slide-active]:z-[2] [&.swiper-slide-active]:shadow-[0_20px_50px_rgba(147,51,234,0.3)] [&.swiper-slide-active]:scale-105 [&.swiper-slide-active]:mt-0">
+                        <div
+                            class="profile-wrapper absolute -top-[50px] left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] [&.swiper-slide-active_&]:w-[100px] [&.swiper-slide-active_&]:h-[100px] [&.swiper-slide-active_&]:-top-[60px] [&.swiper-slide-active_&]:border-[5px] [&.swiper-slide-active_&]:border-white">
+                            <img src="images/testimonials/photo9.jpg" alt="Pallavi Krishna"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="quote-icon-top absolute top-[100px] left-5 text-[4rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                        <h3
+                            class="user-name text-[1.1rem] font-semibold mt-10 mb-[5px] [&.swiper-slide-active_&]:mt-[50px] [&.swiper-slide-active_&]:text-[1.2rem]">
+                            Pallavi Krishna</h3>
+                        <p
+                            class="user-role text-[0.85rem] text-[#777] mb-5 [&.swiper-slide-active_&]:text-white/90 [&.swiper-slide-active_&]:text-[0.9rem]">
+                            Completed 2nd PUC</p>
+                        <div class="testimonial-title text-[1.1rem] font-bold mb-[15px] leading-snug">Fun and light learning approach</div>
+                        <p
+                            class="testimonial-text text-[0.9rem] leading-relaxed text-[#555] font-normal [&.swiper-slide-active_&]:text-white/95">
+                            "Tricks and smart work Periodic table as our good morning prayers. Chemistry was taught in such a fun and light manner."
+                        </p>
+                        <div
+                            class="quote-icon-bottom absolute bottom-5 right-5 text-[5rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                    </div>
+
+                    <!-- Slide 10: ANANYA S -->
+                    <div
+                        class="swiper-slide bg-white rounded-[20px] w-[85%] sm:w-[400px] md:w-[550px] px-6 py-8 md:pt-[50px] md:pb-[40px] md:px-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 relative flex flex-col items-center text-center opacity-100 h-auto mt-5 [&.swiper-slide-active]:bg-[#9333ea] [&.swiper-slide-active]:bg-gradient-to-br [&.swiper-slide-active]:from-[#a855f7] [&.swiper-slide-active]:to-[#9333ea] [&.swiper-slide-active]:text-white [&.swiper-slide-active]:z-[2] [&.swiper-slide-active]:shadow-[0_20px_50px_rgba(147,51,234,0.3)] [&.swiper-slide-active]:scale-105 [&.swiper-slide-active]:mt-0">
+                        <div
+                            class="profile-wrapper absolute -top-[50px] left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] [&.swiper-slide-active_&]:w-[100px] [&.swiper-slide-active_&]:h-[100px] [&.swiper-slide-active_&]:-top-[60px] [&.swiper-slide-active_&]:border-[5px] [&.swiper-slide-active_&]:border-white">
+                            <img src="images/testimonials/photo10.jpg" alt="ANANYA S"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="quote-icon-top absolute top-[100px] left-5 text-[4rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                        <h3
+                            class="user-name text-[1.1rem] font-semibold mt-10 mb-[5px] [&.swiper-slide-active_&]:mt-[50px] [&.swiper-slide-active_&]:text-[1.2rem]">
+                            ANANYA S</h3>
+                        <p
+                            class="user-role text-[0.85rem] text-[#777] mb-5 [&.swiper-slide-active_&]:text-white/90 [&.swiper-slide-active_&]:text-[0.9rem]">
+                            MBBS</p>
+                        <div class="testimonial-title text-[1.1rem] font-bold mb-[15px] leading-snug">Practical application and motivation</div>
+                        <p
+                            class="testimonial-text text-[0.9rem] leading-relaxed text-[#555] font-normal [&.swiper-slide-active_&]:text-white/95">
+                            "The teaching focused on practical application, making classes engaging and easy to grasp. His approach ensured thorough understanding of all topics. I was the student who lacked confidence in clearing NEET, but thanks to his motivation, I learned effective question-solving techniques and topic comprehension, which significantly boosted my scores, especially in chemistry. Achieving MBBS was my lifelong dream, and his guidance played a crucial role in making it a reality."
+                        </p>
+                        <div
+                            class="quote-icon-bottom absolute bottom-5 right-5 text-[5rem] leading-none font-serif text-white/20 hidden [&.swiper-slide-active_&]:block">
+                            " </div>
+                    </div>
+                </div>
+
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        var swiper = new Swiper(".testimonialSwiper", {
+            centeredSlides: true,
+            loop: true,
+            speed: 1200, // Smoother transition
+            grabCursor: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            slidesPerView: "auto", // Allow custom width
+            slidesPerGroup: 1, // Strictly move one slide at a time
+            slideToClickedSlide: true, // Allow clicking side cards to center them
+            initialSlide: 1,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next-custom",
+                prevEl: ".swiper-button-prev-custom",
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: "auto",
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: "auto",
+                    spaceBetween: 30,
+                },
+                1024: {
+                    slidesPerView: "auto",
+                    spaceBetween: 0,
+                },
+            },
+            loopedSlides: 6,
+            effect: 'coverflow',
+            coverflowEffect: {
+                rotate: 0,
+                stretch: 10,
+                depth: 100,
+                modifier: 1,
+                slideShadows: false,
+                scale: 0.95,
+            }
+        });
+    </script>
+</body>
+
+</html>
