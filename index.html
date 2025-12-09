@@ -3379,7 +3379,7 @@ a,
                     </div>
                 </div>
 
-                <div class="px-4 md:px-72 mt-20 mb-20">
+                <div class="px-4 md:px-60 mt-20 mb-20">
                     <div
                         class="swiper myCoursesSwiper w-full h-full overflow-hidden rounded-[2.5rem] courses-swiper-container">
                         <div class="swiper-wrapper">
@@ -3526,6 +3526,41 @@ a,
                                         gap: 20px;
                                     }
 
+                                    @keyframes floatCard {
+
+                                        0%,
+                                        100% {
+                                            transform: translateY(0px);
+                                        }
+
+                                        50% {
+                                            transform: translateY(-10px);
+                                        }
+                                    }
+
+                                    @keyframes floatCardOffset {
+
+                                        0%,
+                                        100% {
+                                            transform: translateY(20px);
+                                        }
+
+                                        50% {
+                                            transform: translateY(10px);
+                                        }
+                                    }
+
+                                    /* Desktop: Odd cards float normally */
+                                    .testbook-cards-right .wcu-process-card:nth-child(odd) {
+                                        animation: floatCard 4s ease-in-out infinite;
+                                    }
+
+                                    /* Desktop: Even cards float with offset */
+                                    .testbook-cards-right .wcu-process-card:nth-child(even) {
+                                        animation: floatCardOffset 4s ease-in-out infinite;
+                                        animation-delay: 1.5s;
+                                    }
+
                                     @media screen and (max-width: 768px) {
                                         .testbook-wrapper {
                                             grid-template-columns: 1fr !important;
@@ -3537,6 +3572,17 @@ a,
                                             gap: 16px !important;
                                         }
 
+                                        /* On mobile, reset all to normal float (overriding inline styles and offset animation) */
+                                        .testbook-cards-right .wcu-process-card:nth-child(odd),
+                                        .testbook-cards-right .wcu-process-card:nth-child(even) {
+                                            animation-name: floatCard;
+                                            transform: none;
+                                        }
+
+                                        .testbook-cards-right .wcu-process-card:nth-child(even) {
+                                            animation-delay: 1s;
+                                        }
+
                                         .wcu-process-card {
                                             transform: none !important;
                                         }
@@ -3545,7 +3591,8 @@ a,
 
                                 <div class="spacer-56 mt-32"></div>
                                 <div class="testbook-wrapper wcu-wapper">
-                                    <div class="testbook-content-left" style="align-self: center;">
+                                    <div class="testbook-content-left"
+                                        style="align-self: start; position: sticky; top: 15%;">
                                         <div class="section-title-left-640px" style="max-width: 100%;">
                                             <div class="spacer-16">
                                                 <div class="section_tag-wapper">
@@ -7567,8 +7614,8 @@ a,
 
                                         <div class="mt-6 mb-6 w-[150%] ml-[-25%]">
                                             <a href="#">
-                                            <img src="images/price/discounts.jpg" alt="Discounts"
-                                                class="w-full h-auto rounded-xl shadow-lg border border-gray-800/50">
+                                                <img src="images/price/discounts.jpg" alt="Discounts"
+                                                    class="w-full h-auto rounded-xl shadow-lg border border-gray-800/50">
                                             </a>
                                         </div>
 
@@ -7850,6 +7897,65 @@ a,
                         </div>
                     </div>
                 </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // FAQ Accordion Functionality
+                        const faqItems = document.querySelectorAll('.faq-qa-wrap');
+
+                        faqItems.forEach(item => {
+                            const questionBlock = item.querySelector('.faq-q-block');
+                            const answerBlock = item.querySelector('.faq-ans-block');
+                            const iconWrap = item.querySelector('.faq-q-icon-wrap');
+                            const icon = iconWrap ? iconWrap.querySelector('.faq-icon') : null;
+
+                            if (questionBlock && answerBlock) {
+                                // Ensure animation property exists
+                                answerBlock.style.overflow = 'hidden';
+                                answerBlock.style.transition = 'height 0.4s ease';
+
+                                questionBlock.addEventListener('click', () => {
+                                    const isActive = item.classList.contains('active');
+
+                                    // Close all others
+                                    faqItems.forEach(otherItem => {
+                                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                                            otherItem.classList.remove('active');
+                                            const otherAns = otherItem.querySelector('.faq-ans-block');
+                                            const otherIconWrap = otherItem.querySelector('.faq-q-icon-wrap');
+                                            const otherIcon = otherItem.querySelector('.faq-icon');
+
+                                            if (otherAns) otherAns.style.height = '0';
+                                            if (otherIconWrap) {
+                                                otherIconWrap.style.transform = 'translate3d(0,0,0) rotate(0deg)';
+                                                otherIconWrap.style.backgroundColor = 'rgba(0,0,0,0)';
+                                            }
+                                            if (otherIcon) otherIcon.style.color = 'rgb(77, 12, 210)';
+                                        }
+                                    });
+
+                                    // Toggle current
+                                    if (isActive) {
+                                        item.classList.remove('active');
+                                        answerBlock.style.height = '0';
+                                        if (iconWrap) {
+                                            iconWrap.style.transform = 'translate3d(0,0,0) rotate(0deg)';
+                                            iconWrap.style.backgroundColor = 'rgba(0,0,0,0)';
+                                        }
+                                        if (icon) icon.style.color = 'rgb(77, 12, 210)';
+                                    } else {
+                                        item.classList.add('active');
+                                        answerBlock.style.height = answerBlock.scrollHeight + 'px';
+                                        if (iconWrap) {
+                                            iconWrap.style.transform = 'translate3d(0,0,0) rotate(180deg)';
+                                            iconWrap.style.backgroundColor = 'rgb(89, 45, 181)';
+                                        }
+                                        if (icon) icon.style.color = '#ffffff';
+                                    }
+                                });
+                            }
+                        });
+                    });
+                </script>
 
 
                 <div class="theme-dark">
@@ -7927,11 +8033,50 @@ a,
                         </div>
                     </div> -->
                 </div>
+
+
+
+
+
+
+                <div class="w-full  max-h-[800px] max-w-[1350px] mx-auto my-10 py-20 px-10">
+                    <div class="relative rounded-3xl overflow-hidden py-14">
+
+                        <div class="absolute inset-0">
+                            <img src="https://asset.sparkl.ac/pb/sparkl_me/img/card_background.png"
+                                class="w-full h-full object-cover" />
+                        </div>
+
+                        <div class="absolute inset-0 bg-black/40"></div>
+                        <div
+                            class="relative z-10 p-10 md:p-14 flex flex-col md:flex-row justify-between items-start md:items-center">
+                            <div>
+                                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                                    Ready to Shine!?
+                                </h1>
+                                <p class="text-gray-300 text-lg">
+                                    Make your learning journey truly personalized
+                                </p>
+                            </div>
+                            <a href="#" class="mt-6 md:mt-0 inline-flex items-center gap-2 bg-gradient-to-r 
+                      from-yellow-400 to-yellow-500 text-gray-900 font-semibold px-6 py-3 
+                      rounded-xl shadow-lg hover:brightness-110 transition">
+                                Register Now
+                                <span>➜</span>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
                 <section class="darkBg">
 
 
 
-                    <div class="websiteFooter_Top !justify-between md:mt-20">
+                    <div class="websiteFooter_Top !justify-between mt-20">
                         <div class="webFooterLogoSection !flex !flex-row !items-center !gap-12 min-w-[350px]">
                             <div data-aos="fade-up">
                                 <img src="media/Hawc%20Revised%20Logo-DeErUAnF.svg" alt="Hawc Logo"
@@ -7987,6 +8132,33 @@ a,
                                             <a href="https://www.facebook.com/Hawc.offici" target="_blank"
                                                 rel="noopener noreferrer">
                                                 <img class="w-20 h-20" src="media/facebook.svg" alt="" />
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="socialMediaLinks" data-aos="fade-up">
+                                    <div class="linksPointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"
+                                            fill="none">
+                                            <circle cx="4" cy="4" r="4" fill="#7A7A7A" />
+                                        </svg> Download App
+                                    </div>
+
+                                    <div class="socialMediaIcons">
+                                        <div class="socialMediaIconCircle">
+                                            <a href="https://play.google.com/store/apps/details?id=com.howandwhyclasses.learners"
+                                                target="_blank" rel="noopener noreferrer">
+                                                <img src="media/playstore.svg" alt="" />
+                                            </a>
+
+                                        </div>
+                                        <div class="socialMediaIconCircle">
+                                            <a href="https://apps.apple.com/in/app/hawc/id6739617482" target="_blank"
+                                                rel="noopener noreferrer">
+                                                <img src="media/apple.svg" alt="" />
                                             </a>
                                         </div>
 
