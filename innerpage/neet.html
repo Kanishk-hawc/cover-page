@@ -1,0 +1,2676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-purple-start': '#3a1c71',
+                        'brand-purple-end': '#2a0845',
+                        'accent-pink': '#ff4b6e',
+                        'accent-yellow': '#fbbf24',
+                    }
+                }
+            }
+        }
+    </script>
+    <title></title>
+    <style>
+        .custom-underline {
+            position: relative;
+            display: inline-block;
+            color: #ff4b6e;
+        }
+
+        .custom-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 4px;
+            background-color: #ff4b6e;
+            border-radius: 2px;
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        .card-layer-1 {
+            background-color: #FFFDF8;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border-radius: 1.5rem;
+        }
+
+        .card-layer-2 {
+            background-color: #FEEAB5;
+            border-radius: 1.5rem;
+            transform: translate(-10px, 15px) rotate(-3deg);
+            z-index: 1;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        .list-container {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .list-item {
+            position: relative;
+            z-index: 10;
+            padding-left: 10px;
+        }
+
+        .number-circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #D1D5DB;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: absolute;
+            left: -38px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .number-text {
+            font-size: 0.75rem;
+            color: #9CA3AF;
+        }
+
+        .connecting-dots {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 21px;
+            width: 1px;
+            background-image: linear-gradient(to bottom, #D1D5DB 33%, rgba(255, 255, 255, 0) 0%);
+            background-position: left;
+            background-size: 1px 12px;
+            background-repeat: repeat-y;
+            z-index: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .timeline-step {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .timeline-step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        body.school-maths-bg {
+            background-color: #FFF9E6;
+            transition: background-color 0.3s ease;
+        }
+
+        body.mental-maths-bg {
+            background-color: #E6F7F0;
+            transition: background-color 0.3s ease;
+        }
+
+        body.real-life-bg {
+            background-color: #F5E6FF;
+            transition: background-color 0.3s ease;
+        }
+
+        body.competitive-bg {
+            background-color: #E6F0FF;
+            transition: background-color 0.3s ease;
+        }
+
+        .visuals-container {
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+            margin: 0 auto;
+        }
+
+        .circle-layer-1 {
+            background-color: #FFC000;
+            border-radius: 50%;
+            width: 90%;
+            max-width: 450px;
+            height: 90%;
+            max-height: 450px;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+        }
+
+        .circle-layer-2 {
+            background-color: #FEEAB5;
+            border-radius: 50%;
+            width: 96%;
+            max-width: 480px;
+            height: 96%;
+            max-height: 480px;
+            top: 50%;
+            left: 50%;
+            z-index: 0;
+            clip-path: circle(50% at 50% 50%);
+            transform: translate(-50%, -50%) rotate(15deg);
+        }
+
+        .gif-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        .gif-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .badge-360 {
+            background-color: #FF8C00;
+            color: white;
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.1;
+            font-weight: 700;
+            position: absolute;
+            top: 30%;
+            left: 10%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge-360 .degree {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .badge-360 .maths {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Renamed Classes */
+        .list-container-360 {
+            position: relative;
+            padding-left: 25px;
+            width: 320px;
+            margin: 0 auto;
+        }
+
+        .list-item-360 {
+            position: relative;
+            z-index: 10;
+            padding-left: 15px;
+            cursor: pointer;
+        }
+
+        .number-circle-360 {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: absolute;
+            left: -20px;
+            top: 0;
+            transform: translateY(20%);
+        }
+
+        .number-circle-colored {
+            border: 1px solid transparent;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .number-text-360 {
+            font-size: 0.75rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .connecting-dots-360 {
+            position: absolute;
+            top: 0;
+            bottom: -20px;
+            left: 15px;
+            width: 1px;
+            background-image: linear-gradient(to bottom, #D1D5DB 33%, rgba(255, 255, 255, 0) 0%);
+            background-position: left;
+            background-size: 1px 12px;
+            background-repeat: repeat-y;
+            z-index: 0;
+        }
+
+        .description-hidden {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out, margin 0.3s ease-out;
+            margin-top: 0 !important;
+        }
+
+        .list-item-360:hover .description-hidden {
+            max-height: 100px;
+            opacity: 1;
+            margin-top: 0.25rem !important;
+        }
+
+        #item-1 .description-text {
+            max-height: 100px;
+            opacity: 1;
+            margin-top: 0.25rem;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out, margin 0.3s ease-out;
+        }
+
+        .get-started-button {
+            background-color: #FFC000;
+            box-shadow: 0 4px 0 #E6A800;
+            transition: background-color 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .visuals-container {
+                height: 400px;
+                margin-bottom: 2rem;
+            }
+
+            .badge-360 {
+                width: 70px;
+                height: 70px;
+                top: 25%;
+                left: 15%;
+            }
+
+            .badge-360 .degree {
+                font-size: 1.2rem;
+            }
+
+            .badge-360 .maths {
+                font-size: 0.65rem;
+            }
+
+            .list-container-360 {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Hero Section Wrapper -->
+    <div class="bg-[#311b92] text-white min-h-screen font-sans flex items-center relative overflow-hidden">
+        <div
+            class="absolute top-[10%] left-[20%] w-[600px] h-[600px] bg-[#4527a0] rounded-full mix-blend-screen filter blur-[150px] opacity-40 animate-blob">
+        </div>
+        <div
+            class="absolute bottom-[-10%] right-[10%] w-[500px] h-[500px] bg-[#512da8] rounded-full mix-blend-screen filter blur-[120px] opacity-30 animate-blob animation-delay-2000">
+        </div>
+        <svg class="hidden md:block absolute top-20 left-0 w-64 h-full pointer-events-none opacity-20"
+            viewBox="0 0 200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 10 C 50 100, 150 200, 50 400" stroke="white" stroke-width="2" stroke-dasharray="5 5" />
+        </svg>
+        <svg class="hidden md:block absolute top-40 left-10 w-12 h-12 text-accent-yellow animate-bounce"
+            viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L15 9L22 9L16 14L18 21L12 17L6 21L8 14L2 9L9 9L12 2Z" />
+        </svg>
+        <svg class="hidden md:block absolute top-0 right-0 w-[500px] h-full pointer-events-none opacity-20"
+            viewBox="0 0 500 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M400 100 C 300 300, 100 400, 200 700" stroke="white" stroke-width="2" stroke-dasharray="8 8" />
+        </svg>
+
+
+        <section class="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+            <div class="flex flex-col justify-center space-y-8">
+
+                <div>
+                    <span
+                        class="inline-block bg-[#4b3588] text-white/90 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">
+                        The Leader in Online Learning
+                    </span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight">
+                    Find the Best <span class="custom-underline">Courses</span> from
+                    the Best <span class="custom-underline">Mentors</span> Around
+                    the World
+                </h1>
+                <p class="text-gray-200 text-lg md:text-[1.1rem] max-w-xl leading-relaxed font-light">
+                    Our specialized online courses are designed to bring the classroom experience to you, no matter
+                    where
+                    you are.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-10 pt-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-[#4a2b88] p-3 rounded-xl shadow-inner">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-300" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 000-2 4 4 0 014-4 1 1 0 000-2 6 6 0 00-6 6z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-pink-300 font-bold text-2xl leading-none">15</p>
+                            <p class="text-gray-300 text-sm font-medium">Online Courses</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-[#2d4b9e] p-3 rounded-xl shadow-inner">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-300" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-blue-300 font-bold text-2xl leading-none">11</p>
+                            <p class="text-gray-300 text-sm font-medium">Enrolled Students</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-[#2e7d32] p-3 rounded-xl shadow-inner">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-300" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-green-300 font-bold text-2xl leading-none">8</p>
+                            <p class="text-gray-300 text-sm font-medium">Experienced Tutors</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="flex flex-wrap items-center gap-10 pt-4">
+
+                    <div class="flex items-center space-x-3 mr-10">
+                        <div class="bg-[#884b2b] p-3 rounded-xl shadow-inner">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-300" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-orange-300 font-bold text-2xl leading-none">100+</p>
+                            <p class="text-gray-300 text-sm font-medium">Lessons</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3 mr-8">
+                        <div class="bg-[#882b2b] p-3 rounded-xl shadow-inner">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-300" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-red-300 font-bold text-2xl leading-none">50+</p>
+                            <p class="text-gray-300 text-sm font-medium">Quizzes</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-[#2b8888] p-3 rounded-xl shadow-inner">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-300" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.236-.497.623-.737 1.125-.479 1.006-.838 2.342-.937 3.974h4.28c-.098-1.631-.458-2.967-.937-3.973-.24-.502-.5-.89-.737-1.125C10.23 3.032 10.076 3 10 4zm2.186.643c.454 1.148.748 2.572.837 4.118h1.946a6.004 6.004 0 00-2.783-4.118zM12.986 11h1.946c-.089 1.546-.383 2.97-.837 4.118a6.004 6.004 0 002.783-4.118zM10 18a8.006 8.006 0 01-2.936-.558c.454-1.148.748-2.572.837-4.118h4.2 8.3c.09-1.545.384-2.97.838-4.118A8.006 8.006 0 0110 18z"
+                                    clip-rule="evenodd" />
+                                <path
+                                    d="M10 18a8.006 8.006 0 01-2.936-.558c.454-1.148.748-2.572.837-4.118h4.2c.089 1.546.383 2.97.837 4.118A8.006 8.006 0 0110 18z" />
+
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-teal-300 font-bold text-2xl leading-none">English, Hindi</p>
+                            <p class="text-gray-300 text-sm font-medium">Language</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="relative flex justify-center md:justify-end mt-12 md:mt-0 perspective-1000">
+                <div
+                    class="absolute w-[340px] h-[440px] bg-white rounded-2xl rotate-[8deg] right-[-20px] top-6 shadow-xl opacity-40">
+                </div>
+                <div
+                    class="absolute w-[340px] h-[440px] bg-white rounded-2xl rotate-[4deg] right-[-10px] top-3 shadow-xl opacity-70">
+                </div>
+                <div
+                    class="bg-white text-gray-900 rounded-2xl shadow-2xl w-[340px] p-5 relative z-10 transition-transform hover:-translate-y-1 duration-300">
+                    <div class="relative group">
+                        <iframe src="https://www.youtube.com/embed/2K9XCPF2S_g?start=611"
+                            class="rounded-xl w-full aspect-video object-cover shadow-sm"
+                            title="Basics Of Organic Chemistry" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                        <button
+                            class="absolute top-3 right-3 bg-white hover:bg-gray-100 text-black/70 p-1.5 rounded-full shadow-sm transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-center mt-5 text-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
+                                <img src="https://ui-avatars.com/api/?name=Instructordemo&background=ffcc80&color=fff"
+                                    class="w-full h-full object-cover" alt="Instructor">
+                            </div>
+                            <span class="font-bold text-gray-800">Instructordemo</span>
+                        </div>
+                        <span class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Chemistry</span>
+                    </div>
+
+                    <h3 class="mt-3 font-extrabold text-xl leading-snug text-gray-900">
+                        Information About chemical bond
+                    </h3>
+
+                    <div class="flex items-center mt-2 space-x-1">
+                        <svg class="w-4 h-4 text-accent-yellow" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                            </path>
+                        </svg>
+                        <span class="text-sm font-bold text-gray-600">4.0</span>
+                        <span class="text-sm text-gray-400 font-medium">(5 Reviews)</span>
+                    </div>
+                    <div class="mt-6 flex items-center justify-between">
+                        <div class="flex items-baseline space-x-2">
+                            <span class="text-red-500 text-xl font-bold">199</span>
+                            <span class="line-through text-gray-400 text-sm font-medium">399</span>
+                        </div>
+
+                        <button
+                            class="bg-black hover:bg-gray-800 text-white px-5 py-2 rounded-full font-bold text-sm transition-transform hover:scale-105 flex items-center space-x-2">
+                            <span>Special for you</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- New Section: Curriculum -->
+    <div class="bg-white min-h-screen font-sans text-gray-900 border-t border-gray-100 flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24">
+
+            <header class="text-center mb-16">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-light text-gray-800 leading-snug tracking-tight">
+                    Aligned with CBSE, ICSE, IGCSE, IB, and <br class="hidden sm:block"> State Boards
+                </h1>
+            </header>
+
+            <div class="flex flex-col lg:flex-row items-start justify-center lg:space-x-16">
+
+                <div class="relative w-full lg:w-[400px] mb-12 lg:mb-0 flex justify-center">
+                    <div class="card-layer-2 absolute top-0 left-0 w-full h-full max-w-xs sm:max-w-sm"></div>
+                    <div class="card-layer-1 w-full max-w-xs sm:max-w-sm relative z-10 p-6 sm:p-8">
+
+
+                        <div
+                            class="text-center text-2xl font-semibold text-gray-800 mb-8 pt-10 flex justify-center items-center">
+
+                            <div class="relative w-48 h-32">
+                                <div
+                                    class="absolute inset-0 bg-accent-yellow/30 rounded-xl transform rotate-12 border border-accent-yellow/40 z-0">
+                                </div>
+                                <div
+                                    class="absolute inset-0 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center space-x-4 p-4 transform -rotate-2 hover:rotate-0 transition-transform duration-300 z-10">
+                                    <div class="flex flex-col items-center gap-2">
+                                        <div
+                                            class="w-12 h-12 rounded-full border-2 border-brand-purple-start relative overflow-hidden">
+                                            <div
+                                                class="absolute top-0 left-0 w-full h-1/2 bg-brand-purple-start/20 border-b border-brand-purple-start">
+                                            </div>
+                                        </div>
+                                        <span class="text-sm font-bold text-gray-600">1/2</span>
+                                    </div>
+                                    <div class="text-gray-400 font-bold">=</div>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <div
+                                            class="w-12 h-12 rounded-full border-2 border-accent-pink relative overflow-hidden grid grid-cols-2 grid-rows-2">
+                                            <div class="bg-accent-pink/20 border-r border-b border-accent-pink"></div>
+                                            <div class="border-b border-accent-pink"></div>
+                                            <div class="bg-accent-pink/20 border-r border-accent-pink"></div>
+                                            <div></div>
+                                        </div>
+                                        <span class="text-sm font-bold text-gray-600">2/4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-center text-sm font-medium text-gray-600">
+                            A visual way to understand <br> equivalent fractions
+                        </p>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-96">
+                    <div class="list-container">
+                        <div class="connecting-dots"></div>
+
+                        <ol class="list-none space-y-4 text-gray-700">
+                            <li class="list-item">
+                                <div class="number-circle">
+                                    <span class="number-text">1</span>
+                                </div>
+                                <span>Number System - 1hr</span>
+                            </li>
+                            <li class="list-item">
+                                <div class="number-circle">
+                                    <span class="number-text">2</span>
+                                </div>
+                                <span>Arithmetic Operations - 1hr</span>
+                            </li>
+                            <li class="list-item">
+                                <div class="number-circle">
+                                    <span class="number-text">3</span>
+                                </div>
+                                <span>Factors, Multiples, and Primes - 3hr</span>
+                            </li>
+                            <li class="list-item">
+                                <div class="number-circle">
+                                    <span class="number-text">4</span>
+                                </div>
+                                <span>Fractions and Their Types - 2hr</span>
+                            </li>
+                            <li class="list-item">
+                                <div class="number-circle">
+                                    <span class="number-text">5</span>
+                                </div>
+                                <span>Introduction to Decimal Numbers - 2hr</span>
+                            </li>
+                            <li class="list-item">
+                                <div class="number-circle">
+                                    <span class="number-text">6</span>
+                                </div>
+                                <span>Time - 1hr</span>
+                            </li>
+                            <li class="list-item">
+                                <div class="number-circle">
+                                    <span class="number-text">7</span>
+                                </div>
+                                <span>Geometry - 1.5hr</span>
+                            </li>
+                            <li class="list-item">
+                                <div class="number-circle">
+                                    <span class="number-text">8</span>
+                                </div>
+                                <span>Measurement - 1hr</span>
+                            </li>
+                            <li class="list-item">
+                                <div class="number-circle">
+                                    <span class="number-text">9</span>
+                                </div>
+                                <span>Money - 1hr</span>
+                            </li>
+                            <li class="list-item">
+                                <div class="number-circle">
+                                    <span class="number-text">10</span>
+                                </div>
+                                <span>Data Handling - 2hr</span>
+                            </li>
+                        </ol>
+
+                    </div>
+
+                    <div class="mt-6 ml-4">
+                        <a href="#"
+                            class="text-sm text-gray-800 hover:text-gray-600 font-medium border-b border-gray-800 pb-0.5">
+                            View Detailed Curriculum
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-20">
+                <button
+                    class="px-16 py-4 bg-yellow-500 text-white font-bold text-lg rounded-xl shadow-lg hover:bg-yellow-600 transition duration-300 focus:outline-none"
+                    style="background-color: #FFC000; box-shadow: 0 5px 0 #E6A800;">
+                    Get Started
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- New Section: 360 Degree Maths Approach -->
+    <div class="min-h-screen flex items-center justify-center font-sans relative z-10 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+
+            <header class="text-center mb-10">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-light text-gray-900 leading-snug">
+                    A 360 degree approach for excellence in school & <br> beyond
+                </h1>
+                <p class="text-gray-600 mt-2 font-medium text-sm">No other maths curriculum is as comprehensive!</p>
+            </header>
+
+            <div class="flex flex-col lg:flex-row items-center justify-center lg:space-x-16 mt-16">
+
+                <div class="visuals-container relative flex justify-center items-center">
+                    <div class="circle-layer-2 absolute"></div>
+                    <div class="circle-layer-1 absolute z-10">
+                        <div class="gif-container">
+                            <img src="https://media.giphy.com/media/26n6WywJyh39n1pBu/giphy.gif" alt="School Maths GIF"
+                                class="gif-image" id="main-gif">
+                        </div>
+                    </div>
+
+                    <div class="badge-360 absolute">
+                        <span class="degree">360&deg;</span>
+                        <span class="maths">Maths</span>
+                    </div>
+                </div>
+
+                <div class="mt-10 lg:mt-0 pt-2 lg:w-auto w-full">
+                    <div class="list-container-360">
+                        <div class="connecting-dots-360"></div>
+
+                        <ol class="list-none space-y-7 text-gray-700">
+                            <li class="list-item-360" id="item-1">
+                                <div class="number-circle-360 number-circle-colored bg-yellow-500">
+                                    <span class="number-text-360">1</span>
+                                </div>
+                                <h3 class="font-bold text-base text-gray-800">School Maths</h3>
+                                <p class="description-text text-sm text-gray-600 leading-snug">
+                                    We cover every concept in school maths. The student learns-by-doing, through
+                                    interactive
+                                    simulations and personalised problem sets.
+                                </p>
+                            </li>
+
+                            <li class="list-item-360" id="item-2">
+                                <div class="number-circle-360 number-circle-colored bg-green-500">
+                                    <span class="number-text-360">2</span>
+                                </div>
+                                <h3 class="font-bold text-base text-gray-800">Mental Maths</h3>
+                                <p class="description-text description-hidden text-sm text-gray-600 leading-snug">
+                                    Sharpen rapid calculation skills with fun, timed drills. Develop a keen number sense
+                                    and
+                                    ability to estimate and solve problems quickly without a calculator.
+                                </p>
+                            </li>
+
+                            <li class="list-item-360" id="item-3">
+                                <div class="number-circle-360 number-circle-colored bg-purple-500">
+                                    <span class="number-text-360">3</span>
+                                </div>
+                                <h3 class="font-bold text-base text-gray-800">Real-life maths application</h3>
+                                <p class="description-text description-hidden text-sm text-gray-600 leading-snug">
+                                    See maths in action! Solve problems related to finance, cooking, travel, and more,
+                                    proving the practical value of every concept learned.
+                                </p>
+                            </li>
+
+                            <li class="list-item-360" id="item-4">
+                                <div class="number-circle-360 number-circle-colored bg-blue-500">
+                                    <span class="number-text-360">4</span>
+                                </div>
+                                <h3 class="font-bold text-base text-gray-800">Competitive Maths</h3>
+                                <p class="description-text description-hidden text-sm text-gray-600 leading-snug">
+                                    Advanced problem-solving strategies and preparation for Olympiads and other entrance
+                                    exams, building critical thinking and logic.
+                                </p>
+                            </li>
+                        </ol>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-10 lg:mt-20">
+                <button
+                    class="px-16 py-4 text-white font-bold text-lg rounded-xl transition duration-300 focus:outline-none get-started-button">
+                    Get Started
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        const schoolMathsItem = document.getElementById('item-1');
+        const mentalMathsItem = document.getElementById('item-2');
+        const realLifeItem = document.getElementById('item-3');
+        const competitiveItem = document.getElementById('item-4');
+
+        const schoolMathsDescription = schoolMathsItem.querySelector('.description-text');
+        const mentalMathsDescription = mentalMathsItem.querySelector('.description-text');
+        const realLifeDescription = realLifeItem.querySelector('.description-text');
+        const competitiveDescription = competitiveItem.querySelector('.description-text');
+
+        const mainGif = document.getElementById('main-gif');
+
+        const gifUrls = {
+            1: 'https://media.giphy.com/media/26n6WywJyh39n1pBu/giphy.gif',
+            2: 'https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif',
+            3: 'https://media.giphy.com/media/3o7abAHdYvZdBNnGZq/giphy.gif',
+            4: 'https://media.giphy.com/media/xT5LMHxhOfscxPfIfm/giphy.gif'
+        };
+
+        let activeItem = 1;
+        function hideSchoolMathsDescription() {
+            schoolMathsDescription.style.maxHeight = '0';
+            schoolMathsDescription.style.opacity = '0';
+            schoolMathsDescription.style.marginTop = '0';
+        }
+
+        function showSchoolMathsDescription() {
+            schoolMathsDescription.style.maxHeight = '100px';
+            schoolMathsDescription.style.opacity = '1';
+            schoolMathsDescription.style.marginTop = '0.25rem';
+        }
+
+        function showMentalMathsDescription() {
+            mentalMathsDescription.style.maxHeight = '100px';
+            mentalMathsDescription.style.opacity = '1';
+            mentalMathsDescription.style.marginTop = '0.25rem';
+            mentalMathsDescription.classList.remove('description-hidden');
+        }
+
+        function hideMentalMathsDescription() {
+            mentalMathsDescription.style.maxHeight = '0';
+            mentalMathsDescription.style.opacity = '0';
+            mentalMathsDescription.style.marginTop = '0';
+            mentalMathsDescription.classList.add('description-hidden');
+        }
+
+        function showRealLifeDescription() {
+            realLifeDescription.style.maxHeight = '100px';
+            realLifeDescription.style.opacity = '1';
+            realLifeDescription.style.marginTop = '0.25rem';
+            realLifeDescription.classList.remove('description-hidden');
+        }
+
+        function hideRealLifeDescription() {
+            realLifeDescription.style.maxHeight = '0';
+            realLifeDescription.style.opacity = '0';
+            realLifeDescription.style.marginTop = '0';
+            realLifeDescription.classList.add('description-hidden');
+        }
+
+        function showCompetitiveDescription() {
+            competitiveDescription.style.maxHeight = '100px';
+            competitiveDescription.style.opacity = '1';
+            competitiveDescription.style.marginTop = '0.25rem';
+            competitiveDescription.classList.remove('description-hidden');
+        }
+
+        function hideCompetitiveDescription() {
+            competitiveDescription.style.maxHeight = '0';
+            competitiveDescription.style.opacity = '0';
+            competitiveDescription.style.marginTop = '0';
+            competitiveDescription.classList.add('description-hidden');
+        }
+
+        function changeBackgroundColor(itemNumber) {
+            document.body.classList.remove('school-maths-bg', 'mental-maths-bg', 'real-life-bg', 'competitive-bg');
+            if (itemNumber === 1) {
+                document.body.classList.add('school-maths-bg');
+            } else if (itemNumber === 2) {
+                document.body.classList.add('mental-maths-bg');
+            } else if (itemNumber === 3) {
+                document.body.classList.add('real-life-bg');
+            } else if (itemNumber === 4) {
+                document.body.classList.add('competitive-bg');
+            }
+        }
+        function changeGif(itemNumber) {
+            mainGif.src = gifUrls[itemNumber];
+        }
+        function setItem2AsActive() {
+            activeItem = 2;
+            hideSchoolMathsDescription();
+            showMentalMathsDescription();
+            hideRealLifeDescription();
+            hideCompetitiveDescription();
+            changeBackgroundColor(2);
+            changeGif(2);
+        }
+
+        mentalMathsItem.addEventListener('mouseenter', function () {
+            setItem2AsActive();
+        });
+
+        schoolMathsItem.addEventListener('mouseenter', function () {
+            activeItem = 1;
+            showSchoolMathsDescription();
+            hideMentalMathsDescription();
+            hideRealLifeDescription();
+            hideCompetitiveDescription();
+            changeBackgroundColor(1);
+            changeGif(1);
+        });
+
+        realLifeItem.addEventListener('mouseenter', function () {
+            activeItem = 3;
+            hideSchoolMathsDescription();
+            hideMentalMathsDescription();
+            showRealLifeDescription();
+            hideCompetitiveDescription();
+            changeBackgroundColor(3);
+            changeGif(3);
+        });
+
+        competitiveItem.addEventListener('mouseenter', function () {
+            activeItem = 4;
+            hideSchoolMathsDescription();
+            hideMentalMathsDescription();
+            hideRealLifeDescription();
+            showCompetitiveDescription();
+            changeBackgroundColor(4);
+            changeGif(4);
+        });
+        const listContainer = document.querySelector('.list-container-360');
+
+        listContainer.addEventListener('mouseleave', function () {
+            if (activeItem === 1) {
+                showSchoolMathsDescription();
+                hideMentalMathsDescription();
+                hideRealLifeDescription();
+                hideCompetitiveDescription();
+                changeBackgroundColor(1);
+                changeGif(1);
+            } else if (activeItem === 2) {
+                hideSchoolMathsDescription();
+                showMentalMathsDescription();
+                hideRealLifeDescription();
+                hideCompetitiveDescription();
+                changeBackgroundColor(2);
+                changeGif(2);
+            } else if (activeItem === 3) {
+                hideSchoolMathsDescription();
+                hideMentalMathsDescription();
+                showRealLifeDescription();
+                hideCompetitiveDescription();
+                changeBackgroundColor(3);
+                changeGif(3);
+            } else if (activeItem === 4) {
+                hideSchoolMathsDescription();
+                hideMentalMathsDescription();
+                hideRealLifeDescription();
+                showCompetitiveDescription();
+                changeBackgroundColor(4);
+                changeGif(4);
+            }
+        });
+
+        showSchoolMathsDescription();
+        hideMentalMathsDescription();
+        hideRealLifeDescription();
+        hideCompetitiveDescription();
+        changeBackgroundColor(1);
+        changeGif(1);
+    </script>
+
+
+
+
+
+
+
+    <div
+        class="bg-[#0F1016] py-24 font-sans text-white relative overflow-hidden bg-[url('../images/bg/bgimage.png')] bg-cover bg-center">
+        <div class="absolute top-0 left-0 w-full h-full bg-black/50"></div>
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div class="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-900/40 rounded-full blur-[120px]">
+            </div>
+            <div
+                class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-900/30 rounded-full blur-[120px]">
+            </div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 relative z-10">
+
+            <div class="relative">
+                <div
+                    class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-800 md:transform md:-translate-x-1/2">
+                </div>
+
+                <div
+                    class="timeline-step relative flex flex-col md:flex-row items-center justify-between mb-16 md:mb-24">
+                    <div class="order-1 w-full md:w-5/12"></div>
+                    <div
+                        class="absolute left-4 md:left-1/2 transform -translate-x-[5px] md:-translate-x-1/2 w-3 h-3 bg-[#3B82F6] rounded-full ring-4 ring-[#0F1016] z-20 mt-1.5 md:mt-0">
+                    </div>
+                    <div class="order-2 w-full md:w-5/12 pl-12 md:pl-0 md:text-left">
+                        <span class="text-[#3B82F6] font-bold text-xs tracking-wider uppercase mb-1 block">Step 1</span>
+                        <h3 class="text-2xl font-bold mb-3 flex items-center gap-3">
+                            <span class="bg-[#3B82F6]/10 p-2 rounded-lg text-[#3B82F6]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                            </span>
+                            1:1 Class
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Student attends Live one to one class with expert Teacher with 2 way Video & Audio mandatory
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    class="timeline-step relative flex flex-col md:flex-row items-center justify-between mb-16 md:mb-24">
+                    <div class="order-1 w-full md:w-5/12 pl-12 md:pl-0 md:text-right">
+                        <span class="text-[#F97316] font-bold text-xs tracking-wider uppercase mb-1 block">Step 2</span>
+                        <h3 class="text-2xl font-bold mb-3 flex items-center md:justify-end gap-3">
+                            <span class="bg-[#F97316]/10 p-2 rounded-lg text-[#F97316] md:order-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            </span>
+                            Practice & Homework
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Daily practice homework provided by teachers & checked before every new class
+                        </p>
+                    </div>
+                    <div
+                        class="absolute left-4 md:left-1/2 transform -translate-x-[5px] md:-translate-x-1/2 w-3 h-3 bg-[#F97316] rounded-full ring-4 ring-[#0F1016] z-20 mt-1.5 md:mt-0">
+                    </div>
+                    <div class="order-2 w-full md:w-5/12"></div>
+                </div>
+
+                <div
+                    class="timeline-step relative flex flex-col md:flex-row items-center justify-between mb-16 md:mb-24">
+                    <div class="order-1 w-full md:w-5/12"></div>
+                    <div
+                        class="absolute left-4 md:left-1/2 transform -translate-x-[5px] md:-translate-x-1/2 w-3 h-3 bg-[#3B82F6] rounded-full ring-4 ring-[#0F1016] z-20 mt-1.5 md:mt-0">
+                    </div>
+                    <div class="order-2 w-full md:w-5/12 pl-12 md:pl-0 md:text-left">
+                        <span class="text-[#3B82F6] font-bold text-xs tracking-wider uppercase mb-1 block">Step 3</span>
+                        <h3 class="text-2xl font-bold mb-3 flex items-center gap-3">
+                            <span class="bg-[#3B82F6]/10 p-2 rounded-lg text-[#3B82F6]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                            </span>
+                            Weekly Tests & Mocks
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Chapter Quizzes, Part Syllabus Tests and Full Syllabus Mock Tests are provided. Best in the
+                            industry
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="timeline-step relative flex flex-col md:flex-row items-center justify-between mb-16 md:mb-24">
+                    <div class="order-1 w-full md:w-5/12 pl-12 md:pl-0 md:text-right">
+                        <span class="text-[#22C55E] font-bold text-xs tracking-wider uppercase mb-1 block">Step 4</span>
+                        <h3 class="text-2xl font-bold mb-3 flex items-center md:justify-end gap-3">
+                            <span class="bg-[#22C55E]/10 p-2 rounded-lg text-[#22C55E] md:order-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                            </span>
+                            Mentoring & Tracking
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Every 15 days, senior faculty guides and mentors student. AI led tracking of practice, test
+                            scores and overall performance.
+                        </p>
+                    </div>
+                    <div
+                        class="absolute left-4 md:left-1/2 transform -translate-x-[5px] md:-translate-x-1/2 w-3 h-3 bg-[#22C55E] rounded-full ring-4 ring-[#0F1016] z-20 mt-1.5 md:mt-0">
+                    </div>
+                    <div class="order-2 w-full md:w-5/12"></div>
+                </div>
+                <div
+                    class="timeline-step relative flex flex-col md:flex-row items-center justify-between mb-16 md:mb-24">
+                    <div class="order-1 w-full md:w-5/12"></div>
+                    <div
+                        class="absolute left-4 md:left-1/2 transform -translate-x-[5px] md:-translate-x-1/2 w-3 h-3 bg-[#3B82F6] rounded-full ring-4 ring-[#0F1016] z-20 mt-1.5 md:mt-0">
+                    </div>
+                    <div class="order-2 w-full md:w-5/12 pl-12 md:pl-0 md:text-left">
+                        <span class="text-[#3B82F6] font-bold text-xs tracking-wider uppercase mb-1 block">Step 5</span>
+                        <h3 class="text-2xl font-bold mb-3 flex items-center gap-3">
+                            <span class="bg-[#3B82F6]/10 p-2 rounded-lg text-[#3B82F6]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                </svg>
+                            </span>
+                            Doubt Solving
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            All Doubts resolved in class. Special Doubts sessions scheduled as per need
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-step relative flex flex-col md:flex-row items-center justify-between">
+                    <div class="order-1 w-full md:w-5/12 pl-12 md:pl-0 md:text-right">
+                        <span class="text-[#F97316] font-bold text-xs tracking-wider uppercase mb-1 block">Step 6</span>
+                        <h3 class="text-2xl font-bold mb-3 flex items-center md:justify-end gap-3">
+                            <span class="bg-[#F97316]/10 p-2 rounded-lg text-[#F97316] md:order-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </span>
+                            PTM & Feedback
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Monthly PTM. Daily update and Feedback to parents by teachers. Ad Hoc PTMs arranged when
+                            requested
+                        </p>
+                    </div>
+                    <div
+                        class="absolute left-4 md:left-1/2 transform -translate-x-[5px] md:-translate-x-1/2 w-3 h-3 bg-[#F97316] rounded-full ring-4 ring-[#0F1016] z-20 mt-1.5 md:mt-0">
+                    </div>
+                    <div class="order-2 w-full md:w-5/12"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.3
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const steps = document.querySelectorAll('.timeline-step');
+            steps.forEach(step => observer.observe(step));
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+    <!-- New Section: Tutors Who Care -->
+    <div class="bg-white h-20"></div>
+    <section class="py-16 text-center bg-white">
+        <h2 class="text-4xl font-light mb-14 text-gray-900 mb">Tutors Who Care</h2>
+        <div
+            class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-4 perspective-[1000px] mt-20">
+            <div
+                class="bg-[#65c7f7] p-8 rounded-xl relative overflow-hidden transition-all duration-1000 ease-in-out hover:[transform:rotateY(360deg)]">
+                <div class="w-28 h-28 mx-auto rounded-full border-4 border-white overflow-hidden shadow-sm">
+                    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="profile"
+                        class="w-full h-full object-cover">
+                </div>
+
+                <h3 class="mt-6 font-bold text-lg text-gray-900">NAGA MANASA ELCHURI</h3>
+                <hr class="border-black/10 mt-2 mb-4">
+
+                <p class="text-sm text-gray-800 font-medium">B.Tech.</p>
+                <p class="text-sm text-gray-700">6+ years of experience</p>
+                <p class="text-sm text-gray-700">3500+ hours taught</p>
+            </div>
+            <div
+                class="bg-[#65c7f7] p-8 rounded-xl relative overflow-hidden transition-all duration-1000 ease-in-out hover:[transform:rotateY(360deg)]">
+                <div class="w-28 h-28 mx-auto rounded-full border-4 border-white overflow-hidden shadow-sm">
+                    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="profile"
+                        class="w-full h-full object-cover">
+                </div>
+
+                <h3 class="mt-6 font-bold text-lg text-gray-900">AKSHAYA J.</h3>
+                <hr class="border-black/10 mt-2 mb-4">
+
+                <p class="text-sm text-gray-800 font-medium">M.B.A.</p>
+                <p class="text-sm text-gray-700">7+ years of experience</p>
+                <p class="text-sm text-gray-700">5500+ hours taught</p>
+            </div>
+            <div
+                class="bg-[#65c7f7] p-8 rounded-xl relative overflow-hidden transition-all duration-1000 ease-in-out hover:[transform:rotateY(360deg)]">
+                <div class="w-28 h-28 mx-auto rounded-full border-4 border-white overflow-hidden shadow-sm">
+                    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="profile"
+                        class="w-full h-full object-cover">
+                </div>
+
+                <h3 class="mt-6 font-bold text-lg text-gray-900">BHARTI AGGARWAL</h3>
+                <hr class="border-black/10 mt-2 mb-4">
+
+                <p class="text-sm text-gray-800 font-medium">M.Sc. Mathematics</p>
+                <p class="text-sm text-gray-700">8+ years of experience</p>
+                <p class="text-sm text-gray-700">4500+ hours taught</p>
+            </div>
+
+        </div>
+        <div class="mt-14">
+            <button
+                class="bg-[#aae3ff] hover:bg-[#0052d4] hover:text-white text-black font-semibold px-12 py-4 text-lg shadow-md transition-colors duration-300">
+                Get Started
+            </button>
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- New Section: Student Platform Hero -->
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <style>
+            .wave-bg {
+                background-color: #3b3086;
+                background-image:
+                    radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.03) 20%, transparent 20%),
+                    radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.03) 30%, transparent 30%);
+            }
+        </style>
+    </head>
+    <div class="h-32 bg-white"></div>
+    <div class="bg-white">
+        <h2 class="text-4xl font-light text-gray-900 text-center self-center">Why us </h2>
+    </div>
+    <div class="h-16 bg-white"></div>
+    <div class="bg-gray-50 flex items-center justify-center p-4 md:p-8 py-20 font-inter">
+
+        <div class="w-full max-w-[1440px] mx-auto relative">
+
+            <div
+                class="relative w-full max-w-6xl mx-auto h-80 md:h-[550px] overflow-hidden bg-gray-200 rounded-2xl shadow-2xl z-20">
+                <iframe src="https://www.youtube.com/embed/2K9XCPF2S_g?start=611" class="w-full h-full object-cover"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div
+                class="wave-bg w-full text-white -mt-20 md:-mt-32 pt-32 pb-16 px-10 md:pt-56 md:px-20 md:pb-28 shadow-xl relative z-10 overflow-hidden rounded-[2.5rem]">
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 relative z-30">
+
+                    <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold leading-tight mb-4">
+                                Trusted by the 15,000+ <br class="hidden md:block">
+                                happy students and online <br class="hidden md:block">
+                                users since 2000
+                            </h2>
+                        </div>
+
+                        <div class="flex flex-wrap gap-4">
+                            <button
+                                class="bg-[#ff4757] hover:bg-[#ff6b81] text-white font-semibold px-6 py-3 rounded-full text-sm transition-colors shadow-md">
+                                Enroll as Student
+                            </button>
+
+                            <button
+                                class="bg-[#1e1e1e] hover:bg-gray-900 text-white font-semibold px-6 py-3 rounded-full text-sm transition-colors shadow-md">
+                                Apply as Tutor
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-3 flex flex-col space-y-2 mt-4 lg:mt-0">
+                        <h3 class="text-4xl font-bold">9.8/10</h3>
+                        <p class="text-lg font-bold text-gray-100">Course Approval Score</p>
+                        <p class="text-sm text-gray-300 leading-relaxed max-w-xs">
+                            Achieving a complete course approval score is a significant.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-4 flex flex-col space-y-2 mt-4 lg:mt-0">
+                        <h3 class="text-4xl font-bold">13k</h3>
+                        <p class="text-lg font-bold text-gray-100">Satisfied Students Worldwide</p>
+                        <p class="text-sm text-gray-300 leading-relaxed mb-6">
+                            Satisfied students worldwide share a common thread of happiness.
+                        </p>
+
+                        <div
+                            class="bg-white text-gray-800 p-4 rounded-2xl shadow-lg flex items-center gap-4 mt-6 max-w-md transform lg:translate-y-4">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop"
+                                alt="User Avatar"
+                                class="w-12 h-12 rounded-full object-cover border-2 border-yellow-400 shadow-sm">
+                            <p class="text-sm font-semibold italic text-gray-700 leading-tight">
+                                "All courses are incredibly help people to achieve their goals"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- New Section: The Vinnmugil Edge -->
+    <div class="bg-white h-32"></div>
+    <section class="bg-white w-full text-gray-800 p-6 font-inter">
+
+        <div class="max-w-5xl mx-auto py-16">
+            <div class="text-center mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900">
+                    The <span class="text-[#0052d4]">HAWC</span>: A Clear Advantage
+                </h1>
+                <p class="text-gray-600 mt-3 text-lg">
+                    See how our unique hybrid model combines the best of all worlds for your NEET success.
+                </p>
+            </div>
+
+            <div class="overflow-x-auto rounded-t-xl shadow-sm border border-gray-200">
+                <div class="min-w-[800px]">
+                    <div class="grid grid-cols-4 bg-white text-center rounded-t-xl">
+                        <div class="py-5 px-4 font-bold text-gray-700 text-left">Feature</div>
+                        <div class="py-5 px-4 font-bold text-white bg-[#0052d4] rounded-t-xl"> HAWC </div>
+                        <div class="py-5 px-4 font-bold text-gray-700">Online Coaching</div>
+                        <div class="py-5 px-4 font-bold text-gray-700">Other Coaching</div>
+                    </div>
+
+                    <div class="grid grid-cols-4 border-b border-gray-100 items-center">
+                        <div class="py-6 px-4 font-medium text-gray-700 text-left">Teacher Interaction</div>
+                        <div class="py-6 px-4 bg-[#dbf2f7] text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-gray-700">In-person, face-to-face classes</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                <span class="text-gray-700">Limited to virtual interaction</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 12h16M4 12c0-3 4-3 4-6M20 12c0 3-4 3-4 6" />
+                                </svg>
+                                <span class="text-gray-700">In-person, but large batches</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-4 border-b border-gray-100 items-center">
+                        <div class="py-6 px-4 font-medium text-gray-700 text-left">Personal Attention</div>
+                        <div class="py-6 px-4 bg-[#dbf2f7] text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-gray-700">Dedicated one-on-one mentorship</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                <span class="text-gray-700">Difficult in large online groups</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                <span class="text-gray-700">Often neglected</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-4 border-b border-gray-100 items-center">
+                        <div class="py-6 px-4 font-medium text-gray-700 text-left">Doubt Resolution</div>
+                        <div class="py-6 px-4 bg-[#dbf2f7] text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-gray-700">Any time</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 12h16M4 12c0-3 4-3 4-6M20 12c0 3-4 3-4 6" />
+                                </svg>
+                                <span class="text-gray-700">Delayed via forums/chat</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                <span class="text-gray-700">Limited to post-class hours</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-4 border-b border-gray-100 items-center">
+                        <div class="py-6 px-4 font-medium text-gray-700 text-left">Peer Learning</div>
+                        <div class="py-6 px-4 bg-[#dbf2f7] text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-gray-700">Collaborative classroom</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                <span class="text-gray-700">Isolated learning</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-gray-700">Strong peer interaction</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-4 border-b border-gray-100 items-center">
+                        <div class="py-6 px-4 font-medium text-gray-700 text-left">Flexibility & Tech</div>
+                        <div class="py-6 px-4 bg-[#dbf2f7] text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-gray-700">Class recordings, online tests</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-gray-700">High flexibility, fully tech-based</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                <span class="text-gray-700">Rigid schedule, minimal tech</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-4 border-b border-gray-100 items-center">
+                        <div class="py-6 px-4 font-medium text-gray-700 text-left">Parental Oversight</div>
+                        <div class="py-6 px-4 bg-[#dbf2f7] text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-gray-700">PTMs, regular reports</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                <span class="text-gray-700">Difficult to track engagement</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 12h16M4 12c0-3 4-3 4-6M20 12c0 3-4 3-4 6" />
+                                </svg>
+                                <span class="text-gray-700">PTMs, less frequent reporting</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-4 items-center">
+                        <div class="py-6 px-4 font-medium text-gray-700 text-left">Study Material</div>
+                        <div class="py-6 px-4 bg-[#dbf2f7] text-center rounded-bl-xl">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-gray-700">Integrated physical & digital</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 12h16M4 12c0-3 4-3 4-6M20 12c0 3-4 3-4 6" />
+                                </svg>
+                                <span class="text-gray-700">Mostly digital, screen fatigue</span>
+                            </div>
+                        </div>
+                        <div class="py-6 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                <span class="text-gray-700">Primarily physical books</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    <style>
+        .confetti-bg {
+            background-color: #222222;
+            background-image: url('../images/bg/bgimage2.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <div class="bg-white h-32"></div>
+    <div class="confetti-bg py-24 flex flex-col items-center p-6 text-white w-full ">
+
+        <div class="max-w-7xl mx-auto w-full mt-10">
+
+            <div class="text-center mb-16 space-y-2">
+                <h2 class="text-3xl md:text-5xl font-light tracking-wide text-white">
+                    Pay only if you like us. <span class="font-normal">No strings attached.</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 relative">
+
+                <div class="flex flex-col items-center text-center group">
+                    <div
+                        class="relative z-10 w-14 h-14 rounded-full border-2 border-[#FFC107] flex items-center justify-center text-[#FFC107] font-semibold text-xl bg-[#222]">
+                        1
+                    </div>
+                    <div class="h-12 border-l-2 border-dotted border-[#FFC107] -my-2 opacity-70"></div>
+
+                    <div
+                        class="bg-[#292929] p-8 rounded-3xl w-full h-full shadow-lg hover:bg-[#333] transition-colors duration-300">
+                        <h3 class="font-bold text-lg mb-4 text-white">Tell us about your child</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Fill out a simple form to help us understand your child's unique personality and learning
+                            needs.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center text-center group">
+                    <div
+                        class="relative z-10 w-14 h-14 rounded-full border-2 border-[#FFC107] flex items-center justify-center text-[#FFC107] font-semibold text-xl bg-[#222]">
+                        2
+                    </div>
+                    <div class="h-12 border-l-2 border-dotted border-[#FFC107] -my-2 opacity-70"></div>
+
+                    <div
+                        class="bg-[#292929] p-8 rounded-3xl w-full h-full shadow-lg hover:bg-[#333] transition-colors duration-300">
+                        <h3 class="font-bold text-lg mb-4 text-white">Speak to our counselor</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Discuss your expectations with our counselor, who will match your child with the right tutor
+                            for
+                            a trial session.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center text-center group">
+                    <div
+                        class="relative z-10 w-14 h-14 rounded-full border-2 border-[#FFC107] flex items-center justify-center text-[#FFC107] font-semibold text-xl bg-[#222]">
+                        3
+                    </div>
+                    <div class="h-12 border-l-2 border-dotted border-[#FFC107] -my-2 opacity-70"></div>
+
+                    <div
+                        class="bg-[#292929] p-8 rounded-3xl w-full h-full shadow-lg hover:bg-[#333] transition-colors duration-300">
+                        <h3 class="font-bold text-lg mb-4 text-white">Attend a FREE session</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Watch your child engage and learn with our tutors, and get all your questions answered.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center text-center group">
+                    <div
+                        class="relative z-10 w-14 h-14 rounded-full border-2 border-[#FFC107] flex items-center justify-center text-[#FFC107] font-semibold text-xl bg-[#222]">
+                        4
+                    </div>
+                    <div class="h-12 border-l-2 border-dotted border-[#FFC107] -my-2 opacity-70"></div>
+
+                    <div
+                        class="bg-[#292929] p-8 rounded-3xl w-full h-full shadow-lg hover:bg-[#333] transition-colors duration-300">
+                        <h3 class="font-bold text-lg mb-4 text-white">Choose a plan and pay</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Once you're happy, pick a plan that suits your schedule and make the payment to start your
+                            classes.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex justify-center">
+                <button
+                    class="bg-[#FFC107] hover:bg-[#ffcd38] text-black font-semibold text-lg px-12 py-4 rounded-full shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    Get Started
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- New Section: FAQ Interactive -->
+    <style>
+        .answer-content {
+            transition: all 0.3s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+    </style>
+    <div class="bg-gray-50 flex flex-col items-center py-20 px-4 w-full  ">
+
+        <div class="w-full max-w-4xl mx-auto">
+
+            <h1 class="text-5xl font-light text-center text-gray-800 mt-20 mb-24">FAQs</h1>
+
+            <div id="faq-list" class="border-t border-gray-400">
+
+                <div class="faq-item border-b border-gray-400 overflow-hidden">
+                    <button class="w-full flex justify-between items-center py-8 text-left focus:outline-none group"
+                        onclick="toggleFAQ(this)">
+                        <span
+                            class="text-lg md:text-xl text-gray-700 font-normal pr-8 group-hover:text-black transition-colors">
+                            How do you ensure my child remains engaged and attentive throughout the session?
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="faq-icon h-8 w-8 text-gray-800 flex-shrink-0 transition-transform duration-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                    <div class="answer hidden pb-8 text-gray-600 font-light leading-relaxed">
+                        We use gamified learning modules and real-time interactive puzzles. Our teachers are trained to
+                        monitor attention levels and switch activities if a child seems distracted, ensuring a dynamic
+                        learning environment.
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-gray-400 overflow-hidden">
+                    <button class="w-full flex justify-between items-center py-8 text-left focus:outline-none group"
+                        onclick="toggleFAQ(this)">
+                        <span
+                            class="text-lg md:text-xl text-gray-700 font-normal pr-8 group-hover:text-black transition-colors">
+                            Why is this grade important in Math learning?
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="faq-icon h-8 w-8 text-gray-800 flex-shrink-0 transition-transform duration-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                    <div class="answer hidden pb-8 text-gray-600 font-light leading-relaxed">
+                        This grade builds the foundation for algebra and geometry. Concepts learned here are critical
+                        prerequisites for high school math. Mastering them now prevents gaps in understanding later.
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-gray-400 overflow-hidden">
+                    <button class="w-full flex justify-between items-center py-8 text-left focus:outline-none group"
+                        onclick="toggleFAQ(this)">
+                        <span
+                            class="text-lg md:text-xl text-gray-700 font-normal pr-8 group-hover:text-black transition-colors">
+                            What support does Cuemath provide for school exams?
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="faq-icon h-8 w-8 text-gray-800 flex-shrink-0 transition-transform duration-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                    <div class="answer hidden pb-8 text-gray-600 font-light leading-relaxed">
+                        We align our curriculum with your child's school board (CBSE, ICSE, IB, etc.). We provide
+                        specific exam-prep modules, mock tests, and doubt-clearing sessions prior to school
+                        examinations.
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-gray-400 overflow-hidden">
+                    <button class="w-full flex justify-between items-center py-8 text-left focus:outline-none group"
+                        onclick="toggleFAQ(this)">
+                        <span
+                            class="text-lg md:text-xl text-gray-700 font-normal pr-8 group-hover:text-black transition-colors">
+                            What is the frequency and duration of Cuemath classes?
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="faq-icon h-8 w-8 text-gray-800 flex-shrink-0 transition-transform duration-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                    <div class="answer hidden pb-8 text-gray-600 font-light leading-relaxed">
+                        Classes are typically held 2 to 3 times a week. Each session lasts for 60 minutes, with a mix of
+                        concept learning and practice exercises.
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="see-more-container" class="mt-10 flex flex-col items-center justify-center cursor-pointer group">
+                <span id="see-more-text"
+                    class="text-sm text-gray-700 font-medium mb-1 group-hover:text-black transition-colors">See
+                    More</span>
+                <svg id="see-more-icon" xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4 text-gray-700 group-hover:text-black transition-colors animate-bounce" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </div>
+
+        </div>
+
+        <script>
+            function toggleFAQ(button) {
+                const answerDiv = button.nextElementSibling;
+                const icon = button.querySelector('.faq-icon');
+
+                if (answerDiv.classList.contains('hidden')) {
+                    answerDiv.classList.remove('hidden');
+                    icon.classList.add('rotate-45');
+                } else {
+                    answerDiv.classList.add('hidden');
+                    icon.classList.remove('rotate-45');
+                }
+            }
+            const extraFAQs = [
+                {
+                    question: "Do you offer personalized learning plans?",
+                    answer: "Yes, every student starts with a diagnostic test. Based on the results, we create a customized learning path that targets their specific weak areas while strengthening their strong suits."
+                },
+                {
+                    question: "How can I track my child's progress?",
+                    answer: "Parents get access to a dedicated dashboard where they can see detailed reports on class attendance, quiz scores, and concept mastery levels in real-time."
+                },
+                {
+                    question: "What are the technical requirements for the classes?",
+                    answer: "You only need a stable internet connection and a laptop or tablet with a working camera and microphone. Our platform is browser-based, so no heavy software installation is required."
+                }
+            ];
+
+            let extraFAQElements = [];
+            let showMore = false;
+            function loadMoreFAQs() {
+                const container = document.getElementById('faq-list');
+                const buttonContainer = document.getElementById('see-more-container');
+                const seeMoreText = document.getElementById('see-more-text');
+                const seeMoreIcon = document.getElementById('see-more-icon');
+                extraFAQs.forEach(faq => {
+                    const html = `
+                    <div class="extra-faq-item border-b border-gray-400 overflow-hidden animate-fade-in-up">
+                        <button class="w-full flex justify-between items-center py-8 text-left focus:outline-none group" onclick="toggleFAQ(this)">
+                            <span class="text-lg md:text-xl text-gray-700 font-normal pr-8 group-hover:text-black transition-colors">
+                                ${faq.question}
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="faq-icon h-8 w-8 text-gray-800 flex-shrink-0 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4" />
+                            </svg>
+                        </button>
+                        <div class="answer hidden pb-8 text-gray-600 font-light leading-relaxed">
+                            ${faq.answer}
+                        </div>
+                    </div>
+                `;
+                    container.insertAdjacentHTML('beforeend', html);
+                    const newElement = container.lastElementChild;
+                    extraFAQElements.push(newElement);
+                });
+                seeMoreText.textContent = "See Less";
+                seeMoreIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />`;
+                showMore = true;
+            }
+            function loadLessFAQs() {
+                const container = document.getElementById('faq-list');
+                const seeMoreText = document.getElementById('see-more-text');
+                const seeMoreIcon = document.getElementById('see-more-icon');
+                extraFAQElements.forEach(element => {
+                    if (element && element.parentNode === container) {
+                        container.removeChild(element);
+                    }
+                });
+                extraFAQElements = [];
+                seeMoreText.textContent = "See More";
+                seeMoreIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />`;
+                showMore = false;
+            }
+
+            function toggleSeeMore() {
+                if (showMore) {
+                    loadLessFAQs();
+                } else {
+                    loadMoreFAQs();
+                }
+            }
+            document.getElementById('see-more-container').addEventListener('click', toggleSeeMore);
+        </script>
+    </div>
+    <div class="bg-[#F9FAFB] h-20 "></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Footer Styles -->
+    <style>
+        .websiteFooter {
+            width: 100%;
+            background-color: #000;
+            color: white;
+
+            padding: 7.5rem;
+
+            padding-bottom: 0;
+
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .websiteFooter_Top {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2rem;
+            padding-bottom: 4rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .webFooterLogoSection,
+        .webFooterLinksSection {
+            flex: 0.5;
+        }
+
+        .webFooterLogoSectionPara {
+            color: var(--Neutral-Ash-Grey, #b6bbc0);
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+            /* 1.4rem */
+            margin-top: 2rem;
+
+            width: 75%;
+            display: none;
+        }
+
+        .topFooterLinks ul {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2.56rem;
+            margin-bottom: 2rem;
+        }
+
+        .topFooterLinks ul li a {
+            color: white;
+            font-family: Manrope, sans-serif;
+
+        }
+
+        .socialConnection {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+
+        .contactLinks {
+            margin-top: 1.5rem;
+        }
+
+        .socialConnection a {
+            color: var(--Neutral-Ash-Grey, #b6bbc0);
+            font-family: Inter, sans-serif;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+            /* 1.4rem */
+        }
+
+        .linksPointer {
+            color: var(--Neutral-Granite, #7a7a7a);
+            font-family: Manrope, sans-serif;
+            font-size: 0.75rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 100%;
+            /* 0.75rem */
+            letter-spacing: 0.03rem;
+            text-transform: uppercase;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+
+            margin-bottom: 1rem;
+        }
+
+        .contactLinks {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+
+        .socialMediaIcons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.75rem;
+        }
+
+        .socialMediaIconCircle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .socialMediaIconCircle a {
+            line-height: 0;
+        }
+
+        /* ------------------------------ */
+
+        .courseCat {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.5rem;
+
+            color: var(--Neutral-Granite, #7a7a7a);
+            font-family: Manrope, sans-serif;
+            font-size: 0.75rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 100%;
+            /* 0.75rem */
+            letter-spacing: 0.03rem;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .linksGridSystem_row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            margin-bottom: 2.5rem;
+        }
+
+        .CourseOf {
+            min-width: 270px;
+
+            color: var(--Neutral-White, #fff);
+            font-family: Manrope, sans-serif;
+            font-size: 1.375rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+            /* 1.925rem */
+        }
+
+        .courseCategory {
+            color: var(--Neutral-Ash-Grey, #b6bbc0);
+            font-family: Inter, sans-serif;
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 140%;
+            /* 1.225rem */
+            margin-bottom: 0.5rem;
+        }
+
+        .courseLinksGrid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 200px));
+            gap: 1.5rem;
+        }
+
+
+        .courseLinksGrid a {
+            display: block;
+            cursor: pointer;
+            color: var(--Neutral-Granite, #7a7a7a);
+            font-family: Inter, sans-serif;
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+            /* 1.225rem */
+            margin-bottom: 0.3rem;
+        }
+
+
+
+        .bottomfooterLinks {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 auto;
+        }
+
+        .disclaimerTextIndex {
+            color: var(--Neutral-Ash-Grey, #B6BBC0);
+            font-family: Inter, sans-serif;
+            font-size: 0.75rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+            /* 1.05rem */
+            text-align: left;
+            width: 50%;
+        }
+
+
+        .bottomfooterLinksIndex {
+            padding-bottom: 2rem;
+        }
+
+        .bottomfooterLinksText {
+            color: var(--Neutral-Granite, #7A7A7A);
+            font-family: Inter, sans-serif;
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+        }
+
+
+        .copyRightText {
+            color: var(--Neutral-Ash-Grey, #B6BBC0);
+            text-align: center;
+            font-family: Inter, sans-serif;
+            font-size: 0.75rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+        }
+
+
+
+        .footerLeftLinks {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .darkBg {
+            background-color: #000;
+            width: 100%;
+            color: white;
+            padding: 7.5rem 7.5rem 0 7.5rem;
+            display: block;
+            position: relative;
+            margin-bottom: 0;
+        }
+
+        .courseCardBox4::before {
+            background: linear-gradient(270deg,
+                    rgba(0, 0, 0, 0) 70.17%,
+                    rgba(0, 0, 0, 0.7) 100%),
+                linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 100%),
+                url("../images/neet_course.jpg");
+        }
+
+
+        @media screen and (width<=600px) {
+
+            .websiteFooter {
+                padding: 1.5rem;
+            }
+
+            .websiteFooter_Top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .socialConnection {
+                flex-direction: column;
+            }
+
+            .linksGridSystem_row {
+                flex-direction: column;
+
+                margin-bottom: 2rem;
+            }
+
+            .CourseOf {
+                margin-bottom: 1.5rem;
+            }
+
+            .courseLinksGrid {
+                grid-template-columns: repeat(2, minmax(0, 40vw));
+            }
+
+            .bottomfooterLinks {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                margin: 1rem 0;
+            }
+
+            .linksGridSystem {
+                margin-bottom: 6rem;
+            }
+
+            .topFooterLinks ul li {
+                width: max-content;
+            }
+
+            .disclaimerTextIndex {
+                width: 100%;
+            }
+
+        }
+    </style>
+
+    <section class="darkBg">
+        <div class="websiteFooter_Top !justify-between ">
+            <div class="webFooterLogoSection !flex !flex-row !items-center !gap-12 min-w-[350px]">
+                <div data-aos="fade-up">
+                    <img src="../media/Hawc%20Revised%20Logo-DeErUAnF.svg" alt="Hawc Logo" class="w-10 md:w-10" />
+                </div>
+                <div class="flex gap-8 text-white font-manrope font-medium uppercase tracking-wider" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <a href="/" class="hover:text-[#FACC15] transition-colors">HOW & WHY</a>
+                </div>
+            </div>
+            <div class="webFooterLinksSection md:mt-0 !flex-none">
+                <div class="socialConnection !justify-end">
+                    <div class="socialConnectionNumberEmail" data-aos="fade-up">
+                        <div class="linksPointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none">
+                                <circle cx="4" cy="4" r="4" fill="#7A7A7A" />
+                            </svg> Contact us
+                        </div>
+                        <div class="contactLinks">
+                            <a href="tel:+918800028514 "> +91 880 002 8514 </a>
+                            <a href="mailto:support@hawc.com"> support@hawc.com </a>
+                        </div>
+                    </div>
+                    <div class="socialMediaLinks" data-aos="fade-up">
+                        <div class="linksPointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none">
+                                <circle cx="4" cy="4" r="4" fill="#7A7A7A" />
+                            </svg> Follow us on
+                        </div>
+
+                        <div class="socialMediaIcons">
+                            <div class="socialMediaIconCircle">
+                                <a href="https://www.youtube.com/@HowAndWhyClasses" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <img src="../media/youtube.svg" alt="" />
+                                </a>
+
+                            </div>
+                            <div class="socialMediaIconCircle">
+                                <a href="/" target="_blank" rel="noopener noreferrer">
+                                    <img src="../media/instagram.svg" alt="" />
+                                </a>
+                            </div>
+                            <div class="socialMediaIconCircle">
+                                <a href="https://www.linkedin.com/company/howandwhyclasses/about/" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <img src="../media/linkedin.svg" alt="" />
+                                </a>
+                            </div>
+                            <div class="socialMediaIconCircle">
+                                <a href="https://www.facebook.com/Hawc.offici" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <img class="w-20 h-20" src="../media/facebook.svg" alt="" />
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="socialMediaLinks" data-aos="fade-up">
+                        <div class="linksPointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none">
+                                <circle cx="4" cy="4" r="4" fill="#7A7A7A" />
+                            </svg> Download App
+                        </div>
+
+                        <div class="socialMediaIcons">
+                            <div class="socialMediaIconCircle">
+                                <a href="https://play.google.com/store/apps/details?id=com.howandwhyclasses.learners"
+                                    target="_blank" rel="noopener noreferrer">
+                                    <img src="../media/playstore.svg" alt="" />
+                                </a>
+
+                            </div>
+                            <div class="socialMediaIconCircle">
+                                <a href="https://apps.apple.com/in/app/hawc/id6739617482" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <img src="../media/apple.svg" alt="" />
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="websiteFooter_Bottom">
+            <div class="courseCat" data-aos="fade-up">
+                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none">
+                    <circle cx="4" cy="4" r="4" fill="#7A7A7A" />
+                </svg> course categories
+            </div>
+
+            <div class="linksGridSystem">
+                <div class="linksGridSystem_row" data-aos="fade-up">
+                    <div class="CourseOf">ICSC</div>
+
+                    <div class="courseLinksGrid">
+                        <div>
+                            <div class="courseCategory">MYP 4</div>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/ib-myp4/extended-mathematics">Extended
+                                Mathematics</a>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/ib-myp4/standard-mathematics">Standard
+                                Mathematics</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp4/physics">Physics</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp4/chemistry">Chemistry</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp4/biology">Biology</a>
+                        </div>
+                        <div>
+                            <div class="courseCategory">MYP 5</div>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/ib-myp5/extended-mathematics">Extended
+                                Mathematics</a>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/ib-myp5/standard-mathematics">Standard
+                                Mathematics</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp5/physics">Physics</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp5/chemistry">Chemistry</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp5/biology">Biology</a>
+                        </div>
+                        <div>
+                            <div class="courseCategory">DP 1</div>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/math-aa-hl">Math
+                                AA HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/math-aa-sl">Math
+                                AA SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/math-ai-sl">Math
+                                AI SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/physics-hl">Physics
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/physics-sl">Physics
+                                SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/chemistry-hl">Chemistry
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/chemistry-sl">Chemistry
+                                SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/biology-hl">Biology
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/biology-sl">Biology
+                                SL</a>
+                        </div>
+                        <div>
+                            <div class="courseCategory">DP 2</div>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/math-aa-hl">Math
+                                AA HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/math-aa-sl">Math
+                                AA SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/math-ai-sl">Math
+                                AI SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/physics-hl">Physics
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/physics-sl">Physics
+                                SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/chemistry-hl">Chemistry
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/chemistry-sl">Chemistry
+                                SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/biology-hl">Biology
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/biology-sl">Biology
+                                SL</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="linksGridSystem_row" data-aos="fade-up" data-aos-delay="100">
+                    <div class="CourseOf">CBSC</div>
+
+                    <div class="courseLinksGrid">
+                        <div>
+                            <div class="courseCategory">IGCSE Grade 9</div>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/igcse-grade9/extended-mathematics">Extended
+                                Mathematics</a>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/igcse-grade9/extended-physics">Extended
+                                Physics</a>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/igcse-grade9/extended-chemistry">Extended
+                                Chemistry</a>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/igcse-grade9/extended-biology">Extended
+                                Biology</a>
+                        </div>
+                        <div>
+                            <div class="courseCategory">IGCSE Grade 10</div>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/igcse-grade10/extended-mathematics">Extended
+                                Mathematics</a>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/igcse-grade10/extended-physics">Extended
+                                Physics</a>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/igcse-grade10/extended-chemistry">Extended
+                                Chemistry</a>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/igcse-grade10/extended-biology">Extended
+                                Biology</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="linksGridSystem_row" data-aos="fade-up" data-aos-delay="200">
+                    <div class="CourseOf">JEE</div>
+
+                    <div class="courseLinksGrid">
+                        <div>
+                            <div class="courseCategory">Math</div>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ap/math-precalculus">AP
+                                Precalculus</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ap/math-calculus-ab">AP
+                                Calculus AB</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ap/math-calculus-bc">AP
+                                Calculus BC</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ap/math-statistics">AP
+                                Statistics</a>
+                        </div>
+                        <div>
+                            <div class="courseCategory">Physics</div>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ap/physics-1-algebra-based">AP
+                                Physics 1</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ap/physics-2-algebra-based">AP
+                                Physics 2</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ap/physics-c-mechanics">AP
+                                Physics
+                                C:
+                                Mechanics</a>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/ap/physics-c-electricity-and-magnetism">AP
+                                Physics C: Electricity & Magnetism</a>
+                        </div>
+                        <div>
+                            <div class="courseCategory">Chemistry</div>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ap/chemistry">AP
+                                Chemistry</a>
+                        </div>
+                        <div>
+                            <div class="courseCategory">Biology</div>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ap/biology">AP
+                                Biology</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="linksGridSystem_row" data-aos="fade-up">
+                    <div class="CourseOf">NEET</div>
+
+                    <div class="courseLinksGrid">
+                        <div>
+                            <div class="courseCategory">MYP 4</div>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/ib-myp4/extended-mathematics">Extended
+                                Mathematics</a>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/ib-myp4/standard-mathematics">Standard
+                                Mathematics</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp4/physics">Physics</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp4/chemistry">Chemistry</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp4/biology">Biology</a>
+                        </div>
+                        <div>
+                            <div class="courseCategory">MYP 5</div>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/ib-myp5/extended-mathematics">Extended
+                                Mathematics</a>
+                            <a class="footerCourseNames"
+                                href="https://sparkl.me/course/ib-myp5/standard-mathematics">Standard
+                                Mathematics</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp5/physics">Physics</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp5/chemistry">Chemistry</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-myp5/biology">Biology</a>
+                        </div>
+                        <div>
+                            <div class="courseCategory">DP 1</div>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/math-aa-hl">Math
+                                AA HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/math-aa-sl">Math
+                                AA SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/math-ai-sl">Math
+                                AI SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/physics-hl">Physics
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/physics-sl">Physics
+                                SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/chemistry-hl">Chemistry
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/chemistry-sl">Chemistry
+                                SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/biology-hl">Biology
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp1/biology-sl">Biology
+                                SL</a>
+                        </div>
+                        <div>
+                            <div class="courseCategory">DP 2</div>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/math-aa-hl">Math
+                                AA HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/math-aa-sl">Math
+                                AA SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/math-ai-sl">Math
+                                AI SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/physics-hl">Physics
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/physics-sl">Physics
+                                SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/chemistry-hl">Chemistry
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/chemistry-sl">Chemistry
+                                SL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/biology-hl">Biology
+                                HL</a>
+                            <a class="footerCourseNames" href="https://sparkl.me/course/ib-dp2/biology-sl">Biology
+                                SL</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottomfooterLinks bottomfooterLinksIndex">
+            <div class="disclaimerTextIndex">
+                © 2025 <i>How and Why Pvt. Ltd.</i> — Independent Personalized tutoring, AI learning
+                and test-prep platform. All exam names (SAT®, ACT®, AP®, GRE®, GMAT®, NEET, JEE, IGCSE®,
+                IB®) are trademarks of their respective owners.
+                <i> No affiliation or endorsement implied </i>.
+            </div>
+            <div class="footerLeftLinks">
+                <a href="terms.html" class="bottomfooterLinksText">Terms and Conditions</a>
+                <a href="policy.html" class="bottomfooterLinksText">Privacy Policy</a>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+
+</html>
