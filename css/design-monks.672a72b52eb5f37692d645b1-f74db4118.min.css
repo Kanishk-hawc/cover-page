@@ -558,7 +558,7 @@ figure {
 }
 
 .button-primary-text {
-    color: #fafafa;
+    color: white;
     letter-spacing: .02rem;
     text-transform: none;
     font-family: Outfit, sans-serif;
@@ -568,7 +568,7 @@ figure {
 }
 
 .button-primary-text.is-purple {
-    color: var(--_theme---base--text--text-button-secondary);
+    color: #7ccff8;
     flex: none
 }
 
@@ -585,7 +585,7 @@ figure {
 }
 
 .ae-element_item-background {
-    background-color: #272727;
+    background-color: #7ccff8;
     border-radius: .75rem;
     margin: .0625rem;
     position: absolute;
@@ -593,8 +593,8 @@ figure {
 }
 
 .ae-element_item-background.pointer-events-off {
-    background-color: #0000;
-    background-image: linear-gradient(#592db5 25%, #7d40ff);
+    background-color: #7ccff8;
+    background-image: #7ccff8;
     border-radius: .5rem;
     margin: .08125rem
 }
